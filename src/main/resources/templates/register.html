@@ -1,0 +1,109 @@
+<!doctype html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Register</title>
+
+    <link rel="stylesheet" th:href="@{css/login.css}">
+
+</head>
+
+<body> <!-- partial:index.partial.html -->
+
+<section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+
+    <div class="signin">
+
+        <div class="content">
+
+            <h2>Register</h2>
+
+            <form method="post"
+                  role="form"
+                  th:action="@{/register/save}"
+                  th:object="${user}"
+                  class="form"
+            >
+
+                <div class="inputBox">
+                    <input id="firstName"
+                           name="firstName"
+                           th:field="*{firstName}"
+                           type="text" required
+                    >
+                    <p th:errors = "*{firstName}" class="text-danger"
+                       th:if="${#fields.hasErrors('firstName')}"></p>
+                    <i>First Name</i>
+                </div>
+
+                <div class="inputBox">
+                    <input id="lastName"
+                           name="lastName"
+                           th:field="*{lastName}"
+                           type="text" required
+                    >
+                    <p th:errors = "*{lastName}" class="text-danger"
+                       th:if="${#fields.hasErrors('lastName')}"></p>
+                    <i>Last Name</i>
+                </div>
+
+                <div class="inputBox">
+                    <input id="username"
+                           name="username"
+                           th:field="*{username}"
+                           type="text" required
+                    >
+                    <p th:errors = "*{username}" class="text-danger"
+                       th:if="${#fields.hasErrors('username')}"></p>
+                    <i>Username</i>
+                </div>
+
+                <div class="inputBox">
+                    <input id="email"
+                           name="email"
+                           th:field="*{email}"
+                           type="email" required
+                    >
+                    <p th:errors = "*{email}" class="text-danger"
+                       th:if="${#fields.hasErrors('email')}"></p>
+                    <i>Email</i>
+                </div>
+
+                <div class="inputBox">
+                    <input id="password"
+                           name="password"
+                           th:field="*{password}"
+                           type="password" required
+                    >
+                    <p th:errors = "*{password}" class="text-danger"
+                       th:if="${#fields.hasErrors('password')}"></p>
+                    <i>Password</i>
+                </div>
+
+                <div class="links"> <a th:href="@{/login}">Already have an account?</a> <a th:href="@{/login}">Login</a>
+
+                </div>
+
+                <div class="inputBox">
+
+                    <input type="submit" value="Submit">
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section> <!-- partial -->
+
+</body>
+
+</html>
