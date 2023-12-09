@@ -27,7 +27,7 @@ public class TestMovieControllerForm {
     }
 
     @PostMapping("/movie-form/save")
-    public String addMovie(@Valid @ModelAttribute("movie") Movie movie,
+    public String addMovie(@Valid @ModelAttribute("movies") Movie movie,
                            BindingResult result,
                            Model model) {
         movieService.pushMovie(movie);

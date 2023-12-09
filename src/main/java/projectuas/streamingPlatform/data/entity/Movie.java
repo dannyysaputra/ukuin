@@ -23,6 +23,9 @@ public class Movie {
     private String movieName;
 
     @Column(nullable = false)
+    private String year;
+
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
@@ -31,10 +34,10 @@ public class Movie {
     @Column(nullable = false)
     private String trailerLink;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 512)
     private String moviePosterUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 512)
     private String movieBackdropUrl;
 
     @Column(nullable = false)

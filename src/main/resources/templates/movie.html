@@ -22,12 +22,13 @@
     <tr th:each="movie : ${movies}">
         <td th:text="${movie.movieName}"></td>
         <td th:text="${movie.description}"></td>
+        <td th:text="${movie.year}"></td>
         <td th:text="${movie.durationInMinute}"></td>
         <td th:text="${movie.trailerLink}"></td>
         <td th:text="${movie.moviePosterUrl}"></td>
         <td th:text="${movie.movieBackdropUrl}"></td>
         <td th:text="${movie.movieTags}"></td>
-        <td th:text="${movie.genres}"></td>
+        <td th:text="${movie.genre}"></td>
     </tr>
 </table>
 </body>
