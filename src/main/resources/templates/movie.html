@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Table</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Movie Name</th>
+        <th>Description</th>
+        <th>Duration (in minutes)</th>
+        <th>Trailer Link</th>
+        <th>Movie Poster URL</th>
+        <th>Movie Backdrop URL</th>
+        <th>Movie Tags</th>
+        <th>Genres</th>
+    </tr>
+    <tr th:each="movie : ${movies}">
+        <td th:text="${movie.movieName}"></td>
+        <td th:text="${movie.description}"></td>
+        <td th:text="${movie.durationInMinute}"></td>
+        <td th:text="${movie.trailerLink}"></td>
+        <td th:text="${movie.moviePosterUrl}"></td>
+        <td th:text="${movie.movieBackdropUrl}"></td>
+        <td th:text="${movie.movieTags}"></td>
+        <td th:text="${movie.genres}"></td>
+    </tr>
+</table>
+</body>
+</html>

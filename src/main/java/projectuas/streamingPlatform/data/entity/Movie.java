@@ -1,14 +1,11 @@
 package projectuas.streamingPlatform.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -44,5 +41,5 @@ public class Movie {
     private String movieTags;
 
     @Column(nullable = false)
-    private ArrayList<String> genres;
+    private String genre;
 }
