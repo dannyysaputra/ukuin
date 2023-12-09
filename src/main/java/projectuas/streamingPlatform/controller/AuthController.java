@@ -1,6 +1,7 @@
 package projectuas.streamingPlatform.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,9 +11,12 @@ import projectuas.streamingPlatform.data.entity.User;
 import projectuas.streamingPlatform.service.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AuthController {
+
+    @Autowired
     private UserService userService;
 
     public AuthController(UserService userService) {
@@ -45,21 +49,36 @@ public class AuthController {
     public String registration(@Valid @ModelAttribute("user") UserDto userDto,
                                BindingResult result,
                                Model model) {
-        User existingEmail = userService.findUserByEmail(userDto.getEmail());
-        User existingUsername = userService.findUserByUsername(userDto.getUsername());
-        
-        if (existingEmail != null && existingEmail.getEmail() != null && !existingEmail.getEmail().isEmpty()) {
-            result.rejectValue("email", null,
-                    "There is already an account registered with the same email");
-        }
+//        User existingEmail = userService.findUserByEmail(userDto.getEmail());
+//        User existingUsername = userService.findUserByUsername(userDto.getUsername());
+//        Optional<User> existingEmail = Optional.ofNullable(userService.findUserByEmail(userDto.getEmail()));
+//        Optional<User> existingUsername = Optional.ofNullable(userService.findUserByUsername(userDto.getUsername()));
+//
+//        if (existingEmail.isPresent() && existingEmail.get().getEmail() != null && !existingEmail.get().getEmail().isEmpty()) {
+//            result.rejectValue("email", null,
+//                    "There is already an account registered with the same email");
+//
+//        }
+//
+//        if (existingUsername.isPresent() && existingUsername.get().getUsername() != null && !existingUsername.get().getUsername().isEmpty()) {
+//            result.rejectValue("username", null,
+//                    "There is already an account registered with the same username");
+//        }
 
-        if (existingUsername != null && existingUsername.getUsername() != null && !existingUsername.getUsername().isEmpty()) {
-            result.rejectValue("username", null,
-                    "There is already an account registered with the same username");
-        }
+
+//        if (existingEmail != null && existingEmail.getEmail() != null && !existingEmail.getEmail().isEmpty()) {
+//            result.rejectValue("email", null,
+//                    "There is already an account registered with the same email");
+//        }
+//
+//        if (existingUsername != null && existingUsername.getUsername() != null && !existingUsername.getUsername().isEmpty()) {
+//            result.rejectValue("username", null,
+//                    "There is already an account registered with the same username");
+//        }
 
         if (result.hasErrors()) {
             model.addAttribute("user", userDto);
+            model.addAttribute("errorMessage", "Error");
             return "/register";
         }
 

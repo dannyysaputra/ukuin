@@ -61,6 +61,9 @@
                     >
                     <p th:errors = "*{username}" class="text-danger"
                        th:if="${#fields.hasErrors('username')}"></p>
+                    <span th:if="${errorMessage != null}" class="text-danger">
+                        {{errorMessage}}
+                    </span>
                     <i>Username</i>
                 </div>
 

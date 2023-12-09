@@ -23,6 +23,8 @@ public class UserDto
 
     private String role;
 
+    private Boolean isPremium;
+
     @NotEmpty(message = "Email should not be empty")
     @Email
     private String email;
