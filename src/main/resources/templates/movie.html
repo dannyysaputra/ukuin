@@ -17,6 +17,7 @@
         <th>Movie Poster URL</th>
         <th>Movie Backdrop URL</th>
         <th>Movie Tags</th>
+        <th>Rating</th>
         <th>Genres</th>
     </tr>
     <tr th:each="movie : ${movies}">
@@ -28,6 +29,7 @@
         <td th:text="${movie.moviePosterUrl}"></td>
         <td th:text="${movie.movieBackdropUrl}"></td>
         <td th:text="${movie.movieTags}"></td>
+        <td th:text="${movie.rating}"></td>
         <td th:text="${movie.genre}"></td>
     </tr>
 </table>

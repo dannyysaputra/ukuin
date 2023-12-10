@@ -82,11 +82,11 @@
             <ul class="navbar-list">
 
                 <li>
-                    <a th:href="@{/}" class="navbar-link">Home</a>
+                    <a th:href="@{/home}" class="navbar-link">Home</a>
                 </li>
 
                 <li>
-                    <a href="#" class="navbar-link">Movie</a>
+                    <a th:href="@{/movies}" class="navbar-link">Movie</a>
                 </li>
 
                 <li>
@@ -245,12 +245,12 @@
 
                 </div>
 
-                <ul class="movies-list  has-scrollbar" th:each="movie : ${movies}">
-                    <li>
+                <ul class="movies-list  has-scrollbar">
+                    <li th:each="movie : ${movies}">
                         <div class="movie-card">
                             <a th:href="@{/movie-details/{id}(id = ${movie.id}) }">
                                 <figure class="card-banner">
-                                    <img th:src="${movie.moviePosterUrl}" alt="The Northman movie poster">
+                                    <img th:src="${movie.moviePosterUrl}" th:alt="${movie.movieName}">
                                 </figure>
                             </a>
 
@@ -274,7 +274,7 @@
                                 <div class="rating">
                                     <ion-icon name="star"></ion-icon>
 
-                                    <data>8.5</data>
+                                    <data th:text="${movie.rating}"></data>
                                 </div>
                             </div>
 
@@ -661,11 +661,11 @@
                 <ul class="footer-list">
 
                     <li>
-                        <a th:href="@{/}" class="footer-link">Home</a>
+                        <a th:href="@{/home}" class="footer-link">Home</a>
                     </li>
 
                     <li>
-                        <a href="#" class="footer-link">Movie</a>
+                        <a th:href="@{/movies}" class="footer-link">Movie</a>
                     </li>
 
                     <li>

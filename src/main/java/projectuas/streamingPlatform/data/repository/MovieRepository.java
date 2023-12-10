@@ -9,6 +9,12 @@ import java.util.List;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
     // custom query
-    @Query(value = "select * from movie where movie.movie_name like %:keyword%", nativeQuery = true)
-    List<Movie> findByMovieName(@Param("keyword") String keyword);
+//    @Query(value = "select * from movie where movie.movie_name like %:keyword%", nativeQuery = true)
+//    List<Movie> findByMovieName(@Param("keyword") String keyword);
+
+    List<Movie> findByMovieNameContaining(String keyword);
+    List<Movie> findAllByOrderByMovieNameAsc();
+    List<Movie> findAllByOrderByRatingAsc();
+    List<Movie> findAllByOrderByMovieNameDesc();
+    List<Movie> findAllByOrderByRatingDesc();
 }
