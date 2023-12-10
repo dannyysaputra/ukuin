@@ -61,7 +61,9 @@
                 </select>
             </div>
 
-            <button class="btn btn-primary">Sign in</button>
+            <form name="logoutForm" th:action="@{/logout}" method="post">
+                <input class="btn btn-primary" type="submit" value="Sign Out"/>
+            </form>
 
         </div>
 

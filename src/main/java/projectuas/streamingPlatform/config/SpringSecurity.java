@@ -44,31 +44,21 @@ public class SpringSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((request) -> {
                     request
-                            .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
-                            .requestMatchers(new AntPathRequestMatcher("/movie-details")).permitAll()
-//                            .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
-//                            .requestMatchers(new AntPathRequestMatcher("/images/**")).permitAll()
-//                            .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
-//                            .requestMatchers(new AntPathRequestMatcher("/login")).permitAll()
-//                            .requestMatchers(new AntPathRequestMatcher("/register")).permitAll()
-//                            .requestMatchers(new AntPathRequestMatcher("/dashboard")).permitAll()
-                            .requestMatchers("/users").hasRole("ADMIN")
+                            .requestMatchers(new AntPathRequestMatcher("/")).authenticated()
+                            .requestMatchers(new AntPathRequestMatcher("/movie-details")).authenticated()
                             .anyRequest().permitAll();
                 })
                 .formLogin(
                         form -> form
                                 .loginPage("/login")
-                                .loginProcessingUrl("/userLogin")
-                                .usernameParameter("email")
                                 .defaultSuccessUrl("/dashboard")
-                                .failureUrl("/login?loginError=true")
                                 .permitAll()
                 )
                 .logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .logoutSuccessUrl("/login?logoutSuccess=true")
-                                .deleteCookies("JSESSIONID")
+//                                .logoutSuccessUrl("/")
+//                                .deleteCookies("JSESSIONID")
                                 .permitAll()
                 )
                 .exceptionHandling(exception -> exception

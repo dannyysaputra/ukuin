@@ -38,6 +38,8 @@ public class User
     @Column(columnDefinition = "varchar(255) default 'ROLE_USER'")
     private String role;
 
+    private Boolean isPremium = false;
+
     public String getRole() {
         return role;
     }
