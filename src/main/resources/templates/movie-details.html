@@ -17,7 +17,7 @@
     <!--
       - custom css link
     -->
-    <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="stylesheet" th:href="@{http://localhost:8008/css/style.css}">
 
     <!--
       - google font link
@@ -38,7 +38,7 @@
 
         <div class="overlay" data-overlay></div>
 
-        <a th:href="@{/}" class="logo">
+        <a th:href="@{/dashboard}" class="logo">
             <img th:src="@{images/logo.svg}" alt="Filmlane logo">
         </a>
 
@@ -61,7 +61,9 @@
                 </select>
             </div>
 
-            <button class="btn btn-primary">Sign in</button>
+            <form name="logoutForm" th:action="@{/logout}" method="post">
+                <input class="btn btn-primary" type="submit" value="Sign Out"/>
+            </form>
 
         </div>
 
@@ -162,7 +164,7 @@
 
                 <figure class="movie-detail-banner">
 
-                    <img th:src="@{images/movie-4.png}" alt="Free guy movie poster">
+                    <img th:src="${movie.moviePosterUrl}" alt="Free guy movie poster">
 
                     <button class="play-btn">
                         <ion-icon name="play-circle-outline"></ion-icon>
@@ -174,26 +176,19 @@
 
                     <p class="detail-subtitle">New Episodes</p>
 
-                    <h1 class="h1 detail-title">
-                        Free <strong>Guy</strong>
+                    <h1 class="h1 detail-title" th:text="${movie.movieName}">
                     </h1>
 
                     <div class="meta-wrapper">
 
                         <div class="badge-wrapper">
-                            <div class="badge badge-fill">PG 13</div>
+                            <div class="badge badge-fill" th:text="${movie.movieTags}"></div>
 
                             <div class="badge badge-outline">HD</div>
                         </div>
 
                         <div class="ganre-wrapper">
-                            <a href="#">Comedy,</a>
-
-                            <a href="#">Action,</a>
-
-                            <a href="#">Adventure,</a>
-
-                            <a href="#">Science Fiction</a>
+                            <a href="" th:text="${movie.genre}"></a>
                         </div>
 
                         <div class="date-time">
@@ -201,23 +196,20 @@
                             <div>
                                 <ion-icon name="calendar-outline"></ion-icon>
 
-                                <time datetime="2021">2021</time>
+                                <time th:text="${movie.year}"></time>
                             </div>
 
                             <div>
                                 <ion-icon name="time-outline"></ion-icon>
 
-                                <time datetime="PT115M">115 min</time>
+                                <time th:text="${movie.durationInMinute}"> min</time>
                             </div>
 
                         </div>
 
                     </div>
 
-                    <p class="storyline">
-                        A bank teller called Guy realizes he is a background character in an open world video game called Free
-                        City that will
-                        soon go offline.
+                    <p class="storyline" th:text="${movie.description}">
                     </p>
 
                     <div class="details-actions">
