@@ -4,10 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import projectuas.streamingPlatform.data.entity.Movie;
 import projectuas.streamingPlatform.service.MovieService;
 
@@ -63,5 +60,28 @@ public class MovieController {
             model.addAttribute("movies", movieService.getAllMovies());
         }
         return "dashboard";
+    }
+
+    @GetMapping("movie/delete/{id}")
+    public String deleteMovieById(@PathVariable("id") Long id, Model model) {
+        Movie movie = movieService.getMovieById(id);
+
+        movieService.deleteMovie(id);
+        return "redirect:/movie";
+    }
+
+    @GetMapping("movie-form/{id}")
+    public String updateMovie(@PathVariable("id") Long id, Model model) {
+        Movie movie = movieService.getMovieById(id);
+        model.addAttribute("movie", movie);
+        return "movie-form-update";
+    }
+
+    @PostMapping("/movie-form/update/{id}")
+    public String updateMovie(@Valid @ModelAttribute("movie") Movie movie, @Valid @ModelAttribute("id") Long id,
+                           BindingResult result,
+                           Model model) {
+        movieService.updateMovie(movie, id);
+        return "redirect:/movie";
     }
 }

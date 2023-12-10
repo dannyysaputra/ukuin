@@ -40,7 +40,6 @@ public class MovieServiceImpl implements MovieService {
     public Movie updateMovie(Movie updatedMovie, Long movie_id) {
         return movieRepository.findById(movie_id).map(movie -> {
             movie.setMovieName(updatedMovie.getMovieName());
-            movie.setMovieName(updatedMovie.getMovieName());
             movie.setYear(updatedMovie.getYear());
             movie.setMovieBackdropUrl(updatedMovie.getMovieBackdropUrl());
             movie.setMoviePosterUrl(updatedMovie.getMoviePosterUrl());
@@ -48,12 +47,13 @@ public class MovieServiceImpl implements MovieService {
             movie.setDurationInMinute(updatedMovie.getDurationInMinute());
             movie.setTrailerLink(updatedMovie.getTrailerLink());
             movie.setDescription(updatedMovie.getDescription());
+            movie.setMovieTags(updatedMovie.getMovieTags());
             return movieRepository.save(movie);
         }).orElse(null);
     }
 
     @Override
     public void deleteMovie(Long movie_id) {
-
+        movieRepository.deleteById(movie_id);
     }
 }
