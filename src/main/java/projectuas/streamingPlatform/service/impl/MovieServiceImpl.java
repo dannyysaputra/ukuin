@@ -35,7 +35,8 @@ public class MovieServiceImpl implements MovieService {
     public Movie updateMovie(Movie updatedMovie, Long movie_id) {
         return movieRepository.findById(movie_id).map(movie -> {
             movie.setMovieName(updatedMovie.getMovieName());
-            movie.setMovieTags(updatedMovie.getMovieTags());
+            movie.setMovieName(updatedMovie.getMovieName());
+            movie.setYear(updatedMovie.getYear());
             movie.setMovieBackdropUrl(updatedMovie.getMovieBackdropUrl());
             movie.setMoviePosterUrl(updatedMovie.getMoviePosterUrl());
             movie.setGenre(updatedMovie.getGenre());
