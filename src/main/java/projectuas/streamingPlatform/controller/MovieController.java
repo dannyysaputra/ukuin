@@ -4,10 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import projectuas.streamingPlatform.data.entity.Movie;
 import projectuas.streamingPlatform.service.MovieService;
 
@@ -54,7 +51,7 @@ public class MovieController {
     }
 
     // handler method to handle homepage request
-    @GetMapping({"/dashboard", "/search"})
+    @GetMapping({"/home", "/search"})
     public String dashboard(Movie movie, Model model, String keyword) {
         if (keyword != null) {
             List<Movie> movieSearch = movieService.getByMovieName(keyword);
@@ -63,5 +60,37 @@ public class MovieController {
             model.addAttribute("movies", movieService.getAllMovies());
         }
         return "dashboard";
+    }
+
+    @GetMapping({"/movies", "/s"})
+    public String movies(Model model, @RequestParam(required = false) String sort,
+                         @RequestParam(required = false) String keyword) {
+        List<Movie> movies;
+
+        if (keyword != null) {
+            movies = movieService.getByMovieName(keyword);
+        } else {
+            if ("nameAsc".equals(sort)) {
+                movies = movieService.getByMovieNameAsc();
+            } else if ("nameDesc".equals(sort)) {
+                movies = movieService.getByMovieNameDesc();
+            } else if ("ratingAsc".equals(sort)) {
+                movies = movieService.getByRatingAsc();
+            } else if ("ratingDesc".equals(sort)) {
+                movies = movieService.getByMovieNameDesc();
+            } else {
+                movies = movieService.getAllMovies();
+            }
+        }
+
+        model.addAttribute("movies", movies);
+        return "movies";
+    }
+
+    @GetMapping("/movies/sortedByNameAsc")
+    public String getMoviesSortedByNameAsc(Model model) {
+        List<Movie> movies = movieService.getByMovieNameAsc();
+        model.addAttribute("movies", movies);
+        return "movies";
     }
 }

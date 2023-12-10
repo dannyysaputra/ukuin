@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Guy 2021</title>
+    <title>Filmlane - Best movie collections</title>
 
     <!--
       - favicon
@@ -17,11 +17,7 @@
     <!--
       - custom css link
     -->
-    <link rel="stylesheet" th:href="@{http://localhost:8008/css/style.css}">
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-    />
+    <link th:href="@{css/style.css}" rel="stylesheet">
 
     <!--
       - google font link
@@ -31,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body id="#top">
+<body id="top">
 
 <!--
   - #HEADER
@@ -42,28 +38,22 @@
 
         <div class="overlay" data-overlay></div>
 
-        <a th:href="@{/dashboard}" class="logo">
+        <a th:href="@{/}" class="logo">
             <img th:src="@{images/logo.svg}" alt="Filmlane logo">
         </a>
 
         <div class="header-actions">
 
-            <button class="search-btn">
-                <ion-icon name="search-outline"></ion-icon>
-            </button>
-
-            <div class="lang-wrapper">
-                <label for="language">
-                    <ion-icon name="globe-outline"></ion-icon>
-                </label>
-
-                <select name="language" id="language">
-                    <option value="en">EN</option>
-                    <option value="au">AU</option>
-                    <option value="ar">AR</option>
-                    <option value="tu">TU</option>
-                </select>
+            <div class="search-container">
+                <form th:action="@{/s}" method="get">
+                    <input type="text" placeholder="Search.." name="keyword" th:value="${keyword}">
+                    <button class="search-btn" type="submit">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
+                </form>
             </div>
+
+
 
             <form name="logoutForm" th:action="@{/logout}" method="post">
                 <input class="btn btn-primary" type="submit" value="Sign Out"/>
@@ -160,127 +150,45 @@
     <article>
 
         <!--
-          - #MOVIE DETAIL
+          - #TOP RATED
         -->
 
-        <section class="movie-detail" th:style="'background-image: url(\'' + ${movie.movieBackdropUrl} + '\');'">
+        <section class="top-rated">
             <div class="container">
 
-                <figure class="movie-detail-banner">
+                <p class="section-subtitle">Online Streaming</p>
 
-                    <img th:src="${movie.moviePosterUrl}" alt="Free guy movie poster">
+                <h2 class="h2 section-title">Top Rated Movies</h2>
 
-                    <button class="play-btn">
-                        <ion-icon name="play-circle-outline"></ion-icon>
-                    </button>
+                <ul class="filter-list">
 
-                </figure>
+                    <li>
+                        <a th:href="@{/movies(sort='nameAsc')}" class="filter-btn">Sort By Name Ascending</a>
+                    </li>
 
-                <div class="movie-detail-content">
+                    <li>
+                        <a th:href="@{/movies(sort='nameDesc')}" class="filter-btn">Sort By Name Descending</a>
 
-                    <p class="detail-subtitle">New Episodes</p>
+                    </li>
 
-                    <h1 class="h1 detail-title" th:text="${movie.movieName}">
-                    </h1>
+                    <li>
+                        <a th:href="@{/movies(sort='ratingAsc')}" class="filter-btn">Sort By Rating Ascending</a>
 
-                    <div class="meta-wrapper">
+                    </li>
 
-                        <div class="badge-wrapper">
-                            <div class="badge badge-fill" th:text="${movie.movieTags}"></div>
+                    <li>
+                        <a th:href="@{/movies(sort='ratingDesc')}" class="filter-btn">Sort By Rating Descending</a>
 
-                            <div class="badge badge-outline">HD</div>
-                        </div>
+                    </li>
 
-                        <div class="ganre-wrapper">
-                            <a href="" th:text="${movie.genre}"></a>
-                        </div>
-
-                        <div class="date-time">
-
-                            <div>
-                                <ion-icon name="calendar-outline"></ion-icon>
-
-                                <time th:text="${movie.year}"></time>
-                            </div>
-
-                            <div>
-                                <ion-icon name="time-outline"></ion-icon>
-
-                                <time th:text="${movie.durationInMinute}"> min</time>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <p class="storyline" th:text="${movie.description}">
-                    </p>
-
-                    <div class="details-actions">
-
-                        <button class="share">
-                            <ion-icon name="share-social"></ion-icon>
-
-                            <span>Share</span>
-                        </button>
-
-                        <a class="btn btn-primary" href="#popup">
-                            <ion-icon name="play"></ion-icon>
-
-                            <span>Watch Trailer</span>
-                        </a>
-
-                        <div id="popup">
-                            <div class="popup">
-                                <iframe
-                                        class="popup-video"
-                                        src="https://www.youtube.com/embed/uYPbbksJxIg?si=WIZMWLT90J_GH6Bf"
-                                        height="100%"
-                                        allowfullscreen="allowfullscreen"
-                                ></iframe>
-                            </div>
-
-                            <div class="popup-close">
-                                <a href="#top">
-                                    <i class="fas fa-times-circle"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <a href="./assets/images/movie-4.png" download class="download-btn">
-                        <span>Download</span>
-
-                        <ion-icon name="download-outline"></ion-icon>
-                    </a>
-
-                </div>
-
-            </div>
-        </section>
-
-
-
-
-
-        <!--
-          - #TV SERIES
-        -->
-
-        <section class="tv-series">
-            <div class="container">
-
-                <p class="section-subtitle">Best TV Series</p>
-
-                <h2 class="h2 section-title">World Best TV Series</h2>
+                </ul>
 
                 <ul class="movies-list  has-scrollbar">
                     <li th:each="movie : ${movies}">
                         <div class="movie-card">
                             <a th:href="@{/movie-details/{id}(id = ${movie.id}) }">
                                 <figure class="card-banner">
-                                    <img th:src="${movie.moviePosterUrl}" alt="The Northman movie poster">
+                                    <img th:src="${movie.moviePosterUrl}" th:alt="${movie.movieName}">
                                 </figure>
                             </a>
 
@@ -304,13 +212,37 @@
                                 <div class="rating">
                                     <ion-icon name="star"></ion-icon>
 
-                                    <data>8.5</data>
+                                    <data th:text="${movie.rating}"></data>
                                 </div>
                             </div>
 
                         </div>
                     </li>
                 </ul>
+
+            </div>
+        </section>
+
+        <!--
+          - #CTA
+        -->
+
+        <section class="cta">
+            <div class="container">
+
+                <div class="title-wrapper">
+                    <h2 class="cta-title">Trial start first 30 days.</h2>
+
+                    <p class="cta-text">
+                        Enter your email to create or restart your membership.
+                    </p>
+                </div>
+
+                <form action="" class="cta-form">
+                    <input type="email" name="email" required placeholder="Enter your email" class="email-field">
+
+                    <button type="submit" class="cta-form-btn">Get started</button>
+                </form>
 
             </div>
         </section>
@@ -334,13 +266,13 @@
             <div class="footer-brand-wrapper">
 
                 <a th:href="@{/}" class="logo">
-                    <img th:src="@{http://localhost:8008/images/logo.svg}" alt="Filmlane logo">
+                    <img th:src="@{images/logo.svg}" alt="Filmlane logo">
                 </a>
 
                 <ul class="footer-list">
 
                     <li>
-                        <a th:href="@{/dashboard}" class="footer-link">Home</a>
+                        <a th:href="@{/home}" class="footer-link">Home</a>
                     </li>
 
                     <li>

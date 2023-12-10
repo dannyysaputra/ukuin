@@ -17,4 +17,10 @@ public interface MovieService {
     void deleteMovie(Long movie_id);
 
     List<Movie> getByMovieName(String keyword);
+
+    List<Movie> getByMovieNameAsc();
+    List<Movie> getByMovieNameDesc();
+    List<Movie> getByRatingAsc();
+    List<Movie> getByRatingDesc();
+
 }

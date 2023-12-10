@@ -33,7 +33,27 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> getByMovieName(String movieName) {
-        return movieRepository.findByMovieName(movieName);
+        return movieRepository.findByMovieNameContaining(movieName);
+    }
+
+    @Override
+    public List<Movie> getByMovieNameAsc() {
+        return movieRepository.findAllByOrderByMovieNameAsc();
+    }
+
+    @Override
+    public List<Movie> getByMovieNameDesc() {
+        return movieRepository.findAllByOrderByMovieNameDesc();
+    }
+
+    @Override
+    public List<Movie> getByRatingAsc() {
+        return movieRepository.findAllByOrderByRatingAsc();
+    }
+
+    @Override
+    public List<Movie> getByRatingDesc() {
+        return movieRepository.findAllByOrderByRatingDesc();
     }
 
     @Override
@@ -46,6 +66,7 @@ public class MovieServiceImpl implements MovieService {
             movie.setMoviePosterUrl(updatedMovie.getMoviePosterUrl());
             movie.setGenre(updatedMovie.getGenre());
             movie.setDurationInMinute(updatedMovie.getDurationInMinute());
+            movie.setRating(updatedMovie.getRating());
             movie.setTrailerLink(updatedMovie.getTrailerLink());
             movie.setDescription(updatedMovie.getDescription());
             return movieRepository.save(movie);
