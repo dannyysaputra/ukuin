@@ -1,7 +1,9 @@
 package projectuas.streamingPlatform.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import projectuas.streamingPlatform.dto.UserDto;
 
 @Controller
 public class MovieController {
@@ -13,7 +15,9 @@ public class MovieController {
 
     // handler method to handle homepage request
     @GetMapping("/dashboard")
-    public String dashboard() {
+    public String dashboard(Model model) {
+        UserDto user = new UserDto();
+        model.addAttribute("user", user);
         return "dashboard";
     }
 }
