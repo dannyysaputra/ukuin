@@ -32,6 +32,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public List<Movie> getByMovieName(String movieName) {
+        return movieRepository.findByMovieName(movieName);
+    }
+
+    @Override
     public Movie updateMovie(Movie updatedMovie, Long movie_id) {
         return movieRepository.findById(movie_id).map(movie -> {
             movie.setMovieName(updatedMovie.getMovieName());

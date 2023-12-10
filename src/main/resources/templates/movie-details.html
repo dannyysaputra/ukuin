@@ -159,7 +159,7 @@
           - #MOVIE DETAIL
         -->
 
-        <section class="movie-detail">
+        <section class="movie-detail" th:style="'background-image: url(\'' + ${movie.movieBackdropUrl} + '\');'">
             <div class="container">
 
                 <figure class="movie-detail-banner">
@@ -260,152 +260,41 @@
 
                 <h2 class="h2 section-title">World Best TV Series</h2>
 
-                <ul class="movies-list">
-
+                <ul class="movies-list  has-scrollbar" th:each="movie : ${movies}">
                     <li>
                         <div class="movie-card">
-
-                            <a th:href="@{/movie-details}">
+                            <a th:href="@{/movie-details/{id}(id = ${movie.id}) }">
                                 <figure class="card-banner">
-                                    <img th:src="@{images/series-1.png}" alt="Moon Knight movie poster">
+                                    <img th:src="${movie.moviePosterUrl}" alt="The Northman movie poster">
                                 </figure>
                             </a>
 
                             <div class="title-wrapper">
                                 <a th:href="@{/movie-details}">
-                                    <h3 class="card-title">Moon Knight</h3>
+                                    <h3 class="card-title" th:text="${movie.movieName}"></h3>
                                 </a>
 
-                                <time datetime="2022">2022</time>
+                                <time th:text="${movie.year}"></time>
                             </div>
 
                             <div class="card-meta">
-                                <div class="badge badge-outline">2K</div>
+                                <div class="badge badge-outline">HD</div>
 
                                 <div class="duration">
                                     <ion-icon name="time-outline"></ion-icon>
 
-                                    <time datetime="PT47M">47 min</time>
+                                    <time th:text="${movie.durationInMinute}"> min</time>
                                 </div>
 
                                 <div class="rating">
                                     <ion-icon name="star"></ion-icon>
 
-                                    <data>8.6</data>
+                                    <data>8.5</data>
                                 </div>
                             </div>
 
                         </div>
                     </li>
-
-                    <li>
-                        <div class="movie-card">
-
-                            <a th:href="@{/movie-details}">
-                                <figure class="card-banner">
-                                    <img th:src="@{images/series-2.png}" alt="Halo movie poster">
-                                </figure>
-                            </a>
-
-                            <div class="title-wrapper">
-                                <a th:href="@{/movie-details}">
-                                    <h3 class="card-title">Halo</h3>
-                                </a>
-
-                                <time datetime="2022">2022</time>
-                            </div>
-
-                            <div class="card-meta">
-                                <div class="badge badge-outline">2K</div>
-
-                                <div class="duration">
-                                    <ion-icon name="time-outline"></ion-icon>
-
-                                    <time datetime="PT59M">59 min</time>
-                                </div>
-
-                                <div class="rating">
-                                    <ion-icon name="star"></ion-icon>
-
-                                    <data>8.8</data>
-                                </div>
-                            </div>
-
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="movie-card">
-
-                            <a th:href="@{/movie-details}">
-                                <figure class="card-banner">
-                                    <img th:src="@{images/series-3.png}" alt="Vikings: Valhalla movie poster">
-                                </figure>
-                            </a>
-
-                            <div class="title-wrapper">
-                                <a th:href="@{/movie-details}">
-                                    <h3 class="card-title">Vikings: Valhalla</h3>
-                                </a>
-
-                                <time datetime="2022">2022</time>
-                            </div>
-
-                            <div class="card-meta">
-                                <div class="badge badge-outline">2K</div>
-
-                                <div class="duration">
-                                    <ion-icon name="time-outline"></ion-icon>
-
-                                    <time datetime="PT51M">51 min</time>
-                                </div>
-
-                                <div class="rating">
-                                    <ion-icon name="star"></ion-icon>
-
-                                    <data>8.3</data>
-                                </div>
-                            </div>
-
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="movie-card">
-
-                            <a th:href="@{/movie-details}">
-                                <figure class="card-banner">
-                                    <img th:src="@{images/series-4.png}" alt="Money Heist movie poster">
-                                </figure>
-                            </a>
-
-                            <div class="title-wrapper">
-                                <a th:href="@{/movie-details}">
-                                    <h3 class="card-title">Money Heist</h3>
-                                </a>
-
-                                <time datetime="2017">2017</time>
-                            </div>
-
-                            <div class="card-meta">
-                                <div class="badge badge-outline">4K</div>
-
-                                <div class="duration">
-                                    <ion-icon name="time-outline"></ion-icon>
-
-                                    <time datetime="PT70M">70 min</time>
-                                </div>
-
-                                <div class="rating">
-                                    <ion-icon name="star"></ion-icon>
-
-                                    <data>8.3</data>
-                                </div>
-                            </div>
-
-                        </div>
-                    </li>
-
                 </ul>
 
             </div>
@@ -430,13 +319,13 @@
             <div class="footer-brand-wrapper">
 
                 <a th:href="@{/}" class="logo">
-                    <img th:src="@{images/logo.svg}" alt="Filmlane logo">
+                    <img th:src="@{http://localhost:8008/images/logo.svg}" alt="Filmlane logo">
                 </a>
 
                 <ul class="footer-list">
 
                     <li>
-                        <a th:href="@{/}" class="footer-link">Home</a>
+                        <a th:href="@{/dashboard}" class="footer-link">Home</a>
                     </li>
 
                     <li>

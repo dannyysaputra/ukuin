@@ -15,4 +15,6 @@ public interface MovieService {
     Movie updateMovie(Movie updatedMovie, Long movie_id);
 
     void deleteMovie(Long movie_id);
+
+    List<Movie> getByMovieName(String keyword);
 }

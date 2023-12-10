@@ -44,22 +44,16 @@
 
         <div class="header-actions">
 
-            <button class="search-btn">
-                <ion-icon name="search-outline"></ion-icon>
-            </button>
-
-            <div class="lang-wrapper">
-                <label for="language">
-                    <ion-icon name="globe-outline"></ion-icon>
-                </label>
-
-                <select name="language" id="language">
-                    <option value="en">EN</option>
-                    <option value="au">AU</option>
-                    <option value="ar">AR</option>
-                    <option value="tu">TU</option>
-                </select>
+            <div class="search-container">
+                <form th:action="@{/search}" method="get">
+                    <input type="text" placeholder="Search.." name="keyword" th:value="${keyword}">
+                    <button class="search-btn" type="submit">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
+                </form>
             </div>
+
+
 
             <form name="logoutForm" th:action="@{/logout}" method="post">
                 <input class="btn btn-primary" type="submit" value="Sign Out"/>

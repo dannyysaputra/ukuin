@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import projectuas.streamingPlatform.data.entity.Movie;
 import projectuas.streamingPlatform.service.MovieService;
 
+import java.util.List;
+
 @Controller
 public class MovieController {
 
@@ -38,8 +40,10 @@ public class MovieController {
     @GetMapping("/movie-details/{id}")
     public String movieDetails(@PathVariable("id") Long movieId, Model model) {
         Movie movie = movieService.getMovieById(movieId);
+
         model.addAttribute("movie", movie);
-        System.out.println(movie);
+        model.addAttribute("movies", movieService.getAllMovies());
+
         return "movie-details";
     }
 
@@ -50,9 +54,14 @@ public class MovieController {
     }
 
     // handler method to handle homepage request
-    @GetMapping("/dashboard")
-    public String dashboard(Model model) {
-        model.addAttribute("movies", movieService.getAllMovies());
+    @GetMapping({"/dashboard", "/search"})
+    public String dashboard(Movie movie, Model model, String keyword) {
+        if (keyword != null) {
+            List<Movie> movieSearch = movieService.getByMovieName(keyword);
+            model.addAttribute("movies", movieSearch);
+        } else {
+            model.addAttribute("movies", movieService.getAllMovies());
+        }
         return "dashboard";
     }
 }
