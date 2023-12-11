@@ -62,6 +62,30 @@ public class MovieController {
         return "dashboard";
     }
 
+
+    @GetMapping("movie/delete/{id}")
+    public String deleteMovieById(@PathVariable("id") Long id, Model model) {
+        Movie movie = movieService.getMovieById(id);
+
+        movieService.deleteMovie(id);
+        return "redirect:/movie";
+    }
+
+    @GetMapping("movie-form/{id}")
+    public String updateMovie(@PathVariable("id") Long id, Model model) {
+        Movie movie = movieService.getMovieById(id);
+        model.addAttribute("movie", movie);
+        return "movie-form-update";
+    }
+
+    @PostMapping("/movie-form/update/{id}")
+    public String updateMovie(@Valid @ModelAttribute("movie") Movie movie, @Valid @ModelAttribute("id") Long id,
+                           BindingResult result,
+                           Model model) {
+        movieService.updateMovie(movie, id);
+        return "redirect:/movie";
+    }
+
     @GetMapping({"/movies", "/s"})
     public String movies(Model model, @RequestParam(required = false) String sort,
                          @RequestParam(required = false) String keyword) {
