@@ -44,14 +44,14 @@ public class SpringSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((request) -> {
                     request
-                            .requestMatchers(new AntPathRequestMatcher("/")).authenticated()
-                            .requestMatchers(new AntPathRequestMatcher("/movie-details")).authenticated()
+                            .requestMatchers(new AntPathRequestMatcher("/home")).authenticated()
+                            .requestMatchers(new AntPathRequestMatcher("/movie-details/**")).authenticated()
                             .anyRequest().permitAll();
                 })
                 .formLogin(
                         form -> form
                                 .loginPage("/login")
-                                .defaultSuccessUrl("/dashboard")
+                                .defaultSuccessUrl("/home")
                                 .permitAll()
                 )
                 .logout(
