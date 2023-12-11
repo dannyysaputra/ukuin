@@ -51,7 +51,7 @@ public class MovieController {
     }
 
     // handler method to handle homepage request
-    @GetMapping({"/dashboard", "/search"})
+    @GetMapping({"/home", "/search"})
     public String dashboard(Movie movie, Model model, String keyword) {
         if (keyword != null) {
             List<Movie> movieSearch = movieService.getByMovieName(keyword);
@@ -61,6 +61,7 @@ public class MovieController {
         }
         return "dashboard";
     }
+
 
     @GetMapping("movie/delete/{id}")
     public String deleteMovieById(@PathVariable("id") Long id, Model model) {
@@ -83,5 +84,37 @@ public class MovieController {
                            Model model) {
         movieService.updateMovie(movie, id);
         return "redirect:/movie";
+    }
+
+    @GetMapping({"/movies", "/s"})
+    public String movies(Model model, @RequestParam(required = false) String sort,
+                         @RequestParam(required = false) String keyword) {
+        List<Movie> movies;
+
+        if (keyword != null) {
+            movies = movieService.getByMovieName(keyword);
+        } else {
+            if ("nameAsc".equals(sort)) {
+                movies = movieService.getByMovieNameAsc();
+            } else if ("nameDesc".equals(sort)) {
+                movies = movieService.getByMovieNameDesc();
+            } else if ("ratingAsc".equals(sort)) {
+                movies = movieService.getByRatingAsc();
+            } else if ("ratingDesc".equals(sort)) {
+                movies = movieService.getByMovieNameDesc();
+            } else {
+                movies = movieService.getAllMovies();
+            }
+        }
+
+        model.addAttribute("movies", movies);
+        return "movies";
+    }
+
+    @GetMapping("/movies/sortedByNameAsc")
+    public String getMoviesSortedByNameAsc(Model model) {
+        List<Movie> movies = movieService.getByMovieNameAsc();
+        model.addAttribute("movies", movies);
+        return "movies";
     }
 }

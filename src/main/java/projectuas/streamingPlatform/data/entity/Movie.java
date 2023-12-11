@@ -44,5 +44,8 @@ public class Movie {
     private String movieTags;
 
     @Column(nullable = false)
+    private Integer rating;
+
+    @Column(nullable = false)
     private String genre;
 }

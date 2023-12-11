@@ -27,28 +27,29 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Year</th>
-                    <th>Duration</th>
-                    <th>Trailer</th>
-                    <th>Poster</th>
-                    <th>Backdrop</th>
-                    <th>Tags</th>
-                    <th>Genre</th>
-                </tr>
+        <th>Movie Name</th>
+        <th>Description</th>
+        <th>Duration (in minutes)</th>
+        <th>Trailer Link</th>
+        <th>Movie Poster URL</th>
+        <th>Movie Backdrop URL</th>
+        <th>Movie Tags</th>
+        <th>Rating</th>
+        <th>Genres</th>
+    </tr>
                 </thead>
                 <tbody>
                 <tr th:each="movie : ${movies}">
                     <td th:text="${movie.movieName}"></td>
-                    <td th:text="${movie.description}"></td>
-                    <td th:text="${movie.year}"></td>
-                    <td th:text="${movie.durationInMinute}"></td>
-                    <td><a th:href="${movie.trailerLink}" th:text="${movie.movieName}"></a></td>
-                    <td><img th:src="${movie.moviePosterUrl}" width="50px"></td>
-                    <td><img th:src="${movie.movieBackdropUrl}" width="50px"></td>
-                    <td th:text="${movie.movieTags}"></td>
-                    <td th:text="${movie.genre}"></td>
+        <td th:text="${movie.description}"></td>
+        <td th:text="${movie.year}"></td>
+        <td th:text="${movie.durationInMinute}"></td>
+        <td th:text="${movie.trailerLink}"></td>
+        <td th:text="${movie.moviePosterUrl}"></td>
+        <td th:text="${movie.movieBackdropUrl}"></td>
+        <td th:text="${movie.movieTags}"></td>
+        <td th:text="${movie.rating}"></td>
+        <td th:text="${movie.genre}"></td>
                     <td>
                         <a class="edit" title="Edit" data-toggle="tooltip" th:href="@{/movie-form/{id}(id = ${movie.id}) }"><i class="material-icons">&#xE254;</i></a>
                         <a class="delete" title="Delete" data-toggle="tooltip" th:href="@{/movie/delete/{id}(id = ${movie.id}) }"><i class="material-icons">&#xE872;</i></a>
