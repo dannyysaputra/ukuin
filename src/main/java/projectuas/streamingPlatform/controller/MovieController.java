@@ -19,14 +19,14 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @GetMapping("/movie-form")
+    @GetMapping("/admin/movie-form")
     public String showMovieForm(Model model){
         Movie movie = new Movie();
         model.addAttribute("movies", movie);
         return "movie-form";
     }
 
-    @PostMapping("/movie-form/save")
+    @PostMapping("/admin/movie-form/save")
     public String addMovie(@Valid @ModelAttribute("movies") Movie movie,
                            BindingResult result,
                            Model model) {
@@ -44,7 +44,7 @@ public class MovieController {
         return "movie-details";
     }
 
-    @GetMapping("/movie")
+    @GetMapping("/admin/movie")
     public String showMovie(Model model) {
         model.addAttribute("movies", movieService.getAllMovies());
         return "movie";
@@ -63,7 +63,7 @@ public class MovieController {
     }
 
 
-    @GetMapping("movie/delete/{id}")
+    @GetMapping("/admin/movie/delete/{id}")
     public String deleteMovieById(@PathVariable("id") Long id, Model model) {
         Movie movie = movieService.getMovieById(id);
 
@@ -71,14 +71,14 @@ public class MovieController {
         return "redirect:/movie";
     }
 
-    @GetMapping("movie-form/{id}")
+    @GetMapping("/admin/movie-form/{id}")
     public String updateMovie(@PathVariable("id") Long id, Model model) {
         Movie movie = movieService.getMovieById(id);
         model.addAttribute("movie", movie);
         return "movie-form-update";
     }
 
-    @PostMapping("/movie-form/update/{id}")
+    @PostMapping("/admin/movie-form/update/{id}")
     public String updateMovie(@Valid @ModelAttribute("movie") Movie movie, @Valid @ModelAttribute("id") Long id,
                            BindingResult result,
                            Model model) {

@@ -8,7 +8,7 @@
     <title>Add Movie</title>
 </head>
 <body>
-<form action="#" th:action="@{/movie-form/save}" th:object="${movies}" method="post">
+<form action="#" th:action="@{/admin/movie-form/save}" th:object="${movies}" method="post">
     <label for="moviename">Movie Name:</label><br>
     <input type="text" id="moviename" th:field="${movies.movieName}"><br>
     <label for="year">Movie Year:</label><br>
