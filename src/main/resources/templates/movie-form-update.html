@@ -25,6 +25,8 @@
     <input type="text" id="moviebackdropurl" th:field="${movie.movieBackdropUrl}" th:value="movie.movieBackdropUrl"><br>
     <label for="movietags">Movie Tags:</label><br>
     <input type="text" id="movietags" th:field="${movie.movieTags}" th:value="movie.movieTags"><br>
+    <label for="rating">Movie rate:</label><br>
+    <input type="number" id="rating" th:field="${movie.rating}" th:value="${movie.rating}"><br>
     <label for="genres">Genres:</label><br>
     <input type="text" id="genres" th:field="${movie.genre}" th:value="movie.genre"><br>
     <input type="submit" value="Submit">
