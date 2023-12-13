@@ -37,7 +37,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("Username not found");
         } else {
-            return new CustomUser(user);
+            CustomUser customUser = new CustomUser(user);
+            customUser.setRoles(user.getRoles());
+            return customUser;
         }
     }
 }
