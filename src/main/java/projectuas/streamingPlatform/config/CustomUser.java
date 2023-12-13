@@ -3,13 +3,18 @@ package projectuas.streamingPlatform.config;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import projectuas.streamingPlatform.data.entity.Role;
 import projectuas.streamingPlatform.data.entity.User;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CustomUser implements UserDetails {
     private User user;
+    private List<Role> roles = new ArrayList<>();
 
     public CustomUser(User user) {
         super();
@@ -18,10 +23,13 @@ public class CustomUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toList());
+    }
 
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
-
-        return Arrays.asList(authority);
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
