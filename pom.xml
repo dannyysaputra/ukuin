@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>projectuas</groupId>
-	<artifactId>streamingPlatform</artifactId>
+	<artifactId>ukm_management</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>streamingPlatform</name>
+	<name>ukm_management</name>
 	<description>For exam</description>
 	<properties>
 		<java.version>21</java.version>

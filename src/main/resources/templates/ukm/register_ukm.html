@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UniT</title>
+    <link rel="icon" th:href="@{images/logo.png}" type="image/png" />
+    <link rel="icon" th:href="@{images/logo.png}" type="image/png" />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" th:href="@{css/start.css}" />
+  </head>
+  <body class="register-body">
+    <form
+      class="form"
+      role="form"
+      method="post"
+      th:action="@{/register/save}"
+      th:object="${ukm}"
+    >
+      <p>Daftar UKM</p>
+      <div class="group">
+        <input
+          required="true"
+          class="main-input"
+          type="text"
+          id="name"
+          name="name"
+          th:field="*{name}"
+        />
+        <span class="highlight-span"></span>
+        <label class="lebal-email">Ukm Name</label>
+        <p
+          th:errors="*{name}"
+          class="text-danger"
+          th:if="${#fields.hasErrors('name')}"
+        ></p>
+      </div>
+      <div class="container-1">
+        <div class="group">
+          <input
+            required="true"
+            class="main-input"
+            type="text"
+            id="email"
+            name="email"
+            th:field="*{email}"
+          />
+          <span class="highlight-span"></span>
+          <label class="lebal-email">Email</label>
+          <p
+            th:errors="*{email}"
+            class="text-danger"
+            th:if="${#fields.hasErrors('email')}"
+          ></p>
+        </div>
+      </div>
+
+      <div class="container-1">
+        <div class="group">
+          <input
+            required="true"
+            class="main-input"
+            type="text"
+            id="description"
+            name="description"
+            th:field="*{description}"
+          />
+          <span class="highlight-span"></span>
+          <label class="lebal-email">Description</label>
+          <p
+            th:errors="*{description}"
+            class="text-danger"
+            th:if="${#fields.hasErrors('description')}"
+          ></p>
+        </div>
+      </div>
+
+      <div class="container-1">
+        <div class="group">
+          <input
+            required="true"
+            class="main-input"
+            type="text"
+            id="vision"
+            name="vision"
+            th:field="*{vision}"
+          />
+          <span class="highlight-span"></span>
+          <label class="lebal-email">Vision</label>
+          <p
+            th:errors="*{vision}"
+            class="text-danger"
+            th:if="${#fields.hasErrors('vision')}"
+          ></p>
+        </div>
+      </div>
+
+      <div class="container-1">
+        <div class="group">
+          <input
+            required="true"
+            class="main-input"
+            type="text"
+            id="mission"
+            name="mission"
+            th:field="*{mission}"
+          />
+          <span class="highlight-span"></span>
+          <label class="lebal-email">Mission</label>
+          <p
+            th:errors="*{mission}"
+            class="text-danger"
+            th:if="${#fields.hasErrors('mission')}"
+          ></p>
+        </div>
+      </div>
+      <div class="container-1">
+        <div class="group">
+          <input
+            required="true"
+            class="main-input"
+            type="password"
+            id="password"
+            name="password"
+            th:field="*{password}"
+          />
+          <span class="highlight-span"></span>
+          <label class="lebal-email">Password</label>
+          <p
+            th:errors="*{password}"
+            class="text-danger"
+            th:if="${#fields.hasErrors('password')}"
+          ></p>
+        </div>
+      </div>
+      <div class="col-lg-12 text-center mt-5">
+        <input
+          type="submit"
+          value="Submit"
+          class="btn btn-secondary btn-sm btn-custom-login-white"
+        />
+      </div>
+    </form>
+
+    <!-- Bootstrap JS dan Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="assets/js/login.js"></script>
+  </body>
+</html>
