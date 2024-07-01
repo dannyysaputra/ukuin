@@ -1,5 +1,7 @@
 package projectuas.ukm_management.data.entity;
 
+import java.util.Set;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,9 +26,6 @@ public class Ukm {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
-    private String password;
-
     @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
@@ -36,10 +35,9 @@ public class Ukm {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String mission;
 
-    @Lob
     @Column(nullable = false)
-    private byte[] logo;
+    private String logo;
 
-    // @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ukm")
-    // private Set<Event> events;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ukm")
+    private Set<Event> events;
 }

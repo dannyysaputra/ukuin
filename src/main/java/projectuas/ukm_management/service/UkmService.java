@@ -3,6 +3,8 @@ package projectuas.ukm_management.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import projectuas.ukm_management.data.entity.Ukm;
 
 public interface UkmService {

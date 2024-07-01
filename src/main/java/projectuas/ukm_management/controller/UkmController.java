@@ -2,17 +2,36 @@ package projectuas.ukm_management.controller;
 
 import jakarta.validation.Valid;
 import projectuas.ukm_management.data.entity.Ukm;
+import projectuas.ukm_management.dto.UkmDto;
 import projectuas.ukm_management.service.UkmService;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UkmController {
+
+    @Value("${upload.dir}")
+    private String uploadDir;
+    private MultipartFile file;
 
     private UkmService ukmService;
 
@@ -22,16 +41,50 @@ public class UkmController {
 
     @GetMapping("/admin/ukm-form")
     public String showUkmForm(Model model) {
-        Ukm ukm = new Ukm();
-        model.addAttribute("ukms", ukm);
+        UkmDto ukmDto = new UkmDto();
+        model.addAttribute("ukm", ukmDto);
         return "ukm/register_ukm";
     }
 
-    @PostMapping("/admin/movie-form/save")
-    public String addUkm(@Valid @ModelAttribute("ukms") Ukm ukm,
-            BindingResult result,
-            Model model) {
+    @PostMapping("/admin/ukm-form/create")
+    public String createUkm(@Valid @ModelAttribute UkmDto ukmDto, BindingResult result) {
+        if (ukmDto.getLogo().isEmpty()) {
+            result.addError(new FieldError("ukmDto", "logo", "The image is empty"));
+        }
+
+        if (result.hasErrors()) {
+            return "ukm/register_ukm";
+        }
+
+        MultipartFile file = ukmDto.getLogo();
+        String fileName = file.getOriginalFilename();
+
+        try {
+            String uploadDir = "public/logos/";
+            Path uploadPath = Paths.get(uploadDir);
+
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+
+            try (InputStream inputStream = file.getInputStream()) {
+                Files.copy(inputStream, Paths.get(uploadDir + fileName),
+                        StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        Ukm ukm = new Ukm();
+        ukm.setDescription(ukmDto.getDescription());
+        ukm.setEmail(ukmDto.getEmail());
+        ukm.setLogo(fileName);
+        ukm.setMission(ukmDto.getMission());
+        ukm.setName(ukmDto.getName());
+        ukm.setVision(ukmDto.getVision());
+
         ukmService.pushUkm(ukm);
+
         return "redirect:/ukm";
     }
 
@@ -53,7 +106,7 @@ public class UkmController {
 
     // handler method to handle homepage request
     @GetMapping("/home")
-    public String dashboard(Ukm movie, Model model) {
+    public String dashboard(Ukm ukm, Model model) {
         // if (keyword != null) {
         // List<Ukm> movieSearch = ukmService.getByUkmName(keyword);
         // model.addAttribute("movies", movieSearch);

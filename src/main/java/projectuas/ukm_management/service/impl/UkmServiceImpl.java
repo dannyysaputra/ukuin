@@ -1,11 +1,16 @@
 package projectuas.ukm_management.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import projectuas.ukm_management.data.entity.Ukm;
 import projectuas.ukm_management.data.repository.UkmRepository;
 import projectuas.ukm_management.service.UkmService;
 
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,6 +18,8 @@ import java.util.List;
 
 @Service
 public class UkmServiceImpl implements UkmService {
+    private final Path root = Paths.get("uploads");
+    
     private UkmRepository ukmRepository;
 
     public UkmServiceImpl(UkmRepository ukmRepository) {
@@ -34,20 +41,20 @@ public class UkmServiceImpl implements UkmService {
         return ukmRepository.save(newUkm);
     }
 
-//    @Override
-//    public List<Ukm> getByUkmName(String movieName) {
-////        return ukmRepository.findByUkmNameContaining(movieName);
-//        List<Ukm> ukms = getByUkmNameAsc();
-//        int index = binarySearchByUkmName(ukms, movieName);
-//
-//        if (index != -1) {
-//            List<Ukm> res = new ArrayList<>();
-//            res.add(ukms.get(index));
-//            return res;
-//        } else {
-//            return Collections.emptyList();
-//        }
-//    }
+    // @Override
+    // public List<Ukm> getByUkmName(String movieName) {
+    //// return ukmRepository.findByUkmNameContaining(movieName);
+    // List<Ukm> ukms = getByUkmNameAsc();
+    // int index = binarySearchByUkmName(ukms, movieName);
+    //
+    // if (index != -1) {
+    // List<Ukm> res = new ArrayList<>();
+    // res.add(ukms.get(index));
+    // return res;
+    // } else {
+    // return Collections.emptyList();
+    // }
+    // }
 
     @Override
     public List<Ukm> getByUkmName(String keyword) {
@@ -75,7 +82,6 @@ public class UkmServiceImpl implements UkmService {
         return result;
     }
 
-
     private int binarySearchByUkmName(List<Ukm> ukms, String keyword) {
         int left = 0;
         int right = ukms.size() - 1;
@@ -90,8 +96,7 @@ public class UkmServiceImpl implements UkmService {
 
             if (res < 0) {
                 left = mid + 1;
-            }
-            else {
+            } else {
                 right = mid - 1;
             }
         }
@@ -100,7 +105,7 @@ public class UkmServiceImpl implements UkmService {
 
     @Override
     public List<Ukm> getByUkmNameAsc() {
-//        return ukmRepository.findAllByOrderByUkmNameAsc();
+        // return ukmRepository.findAllByOrderByUkmNameAsc();
         List<Ukm> ukms = getAllUkms();
         bubbleSortByNameAsc(ukms);
         return ukms;
@@ -121,7 +126,7 @@ public class UkmServiceImpl implements UkmService {
 
     @Override
     public List<Ukm> getByUkmNameDesc() {
-//        return ukmRepository.findAllByOrderByUkmNameDesc();
+        // return ukmRepository.findAllByOrderByUkmNameDesc();
         List<Ukm> ukms = getAllUkms();
         insertionSortByNameDesc(ukms);
         return ukms;

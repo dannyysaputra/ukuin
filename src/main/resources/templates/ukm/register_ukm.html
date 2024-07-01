@@ -1,155 +1,199 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UniT</title>
-    <link rel="icon" th:href="@{images/logo.png}" type="image/png" />
-    <link rel="icon" th:href="@{images/logo.png}" type="image/png" />
-    <!-- Bootstrap CSS -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UKUIN - Register</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <!-- g-font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;600&display=swap"
+      rel="stylesheet"
+    />
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" th:href="@{css/start.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/register_ukm.css}" />
   </head>
-  <body class="register-body">
-    <form
-      class="form"
-      role="form"
-      method="post"
-      th:action="@{/register/save}"
-      th:object="${ukm}"
-    >
-      <p>Daftar UKM</p>
-      <div class="group">
-        <input
-          required="true"
-          class="main-input"
-          type="text"
-          id="name"
-          name="name"
-          th:field="*{name}"
-        />
-        <span class="highlight-span"></span>
-        <label class="lebal-email">Ukm Name</label>
-        <p
-          th:errors="*{name}"
-          class="text-danger"
-          th:if="${#fields.hasErrors('name')}"
-        ></p>
-      </div>
-      <div class="container-1">
-        <div class="group">
-          <input
-            required="true"
-            class="main-input"
-            type="text"
-            id="email"
-            name="email"
-            th:field="*{email}"
-          />
-          <span class="highlight-span"></span>
-          <label class="lebal-email">Email</label>
-          <p
-            th:errors="*{email}"
-            class="text-danger"
-            th:if="${#fields.hasErrors('email')}"
-          ></p>
-        </div>
-      </div>
 
-      <div class="container-1">
-        <div class="group">
-          <input
-            required="true"
-            class="main-input"
-            type="text"
-            id="description"
-            name="description"
-            th:field="*{description}"
-          />
-          <span class="highlight-span"></span>
-          <label class="lebal-email">Description</label>
-          <p
-            th:errors="*{description}"
-            class="text-danger"
-            th:if="${#fields.hasErrors('description')}"
-          ></p>
-        </div>
-      </div>
+  <body>
+    <img class="regis-bg" th:src="@{images/Regis_UKM.png}" width="100%" />
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="register-ukm mt-5">
+            <div class="row" style="width: 950px">
+              <div class="col-lg-12">
+                <form
+                  th:action="@{/admin/ukm-form/create}"
+                  method="post"
+                  th:object="${ukm}"
+                  enctype="multipart/form-data"
+                >
+                  <h3 class="text-white text-center"><b>Daftar UKM</b></h3>
+                  <br />
 
-      <div class="container-1">
-        <div class="group">
-          <input
-            required="true"
-            class="main-input"
-            type="text"
-            id="vision"
-            name="vision"
-            th:field="*{vision}"
-          />
-          <span class="highlight-span"></span>
-          <label class="lebal-email">Vision</label>
-          <p
-            th:errors="*{vision}"
-            class="text-danger"
-            th:if="${#fields.hasErrors('vision')}"
-          ></p>
-        </div>
-      </div>
+                  <div class="group8">
+                    <input
+                      required="true"
+                      class="main-input8"
+                      type="text"
+                      id="name"
+                      name="name"
+                      th:field="*{name}"
+                    />
+                    <span class="highlight-span8"></span>
+                    <label class="lebal-email8">Nama UKM</label>
+                    <p
+                      th:errors="*{name}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('name')}"
+                    ></p>
+                  </div>
 
-      <div class="container-1">
-        <div class="group">
-          <input
-            required="true"
-            class="main-input"
-            type="text"
-            id="mission"
-            name="mission"
-            th:field="*{mission}"
-          />
-          <span class="highlight-span"></span>
-          <label class="lebal-email">Mission</label>
-          <p
-            th:errors="*{mission}"
-            class="text-danger"
-            th:if="${#fields.hasErrors('mission')}"
-          ></p>
-        </div>
-      </div>
-      <div class="container-1">
-        <div class="group">
-          <input
-            required="true"
-            class="main-input"
-            type="password"
-            id="password"
-            name="password"
-            th:field="*{password}"
-          />
-          <span class="highlight-span"></span>
-          <label class="lebal-email">Password</label>
-          <p
-            th:errors="*{password}"
-            class="text-danger"
-            th:if="${#fields.hasErrors('password')}"
-          ></p>
-        </div>
-      </div>
-      <div class="col-lg-12 text-center mt-5">
-        <input
-          type="submit"
-          value="Submit"
-          class="btn btn-secondary btn-sm btn-custom-login-white"
-        />
-      </div>
-    </form>
+                  <div class="container-8">
+                    <div class="group8">
+                      <input
+                        required="true8"
+                        class="main-input8"
+                        type="text"
+                        id="email"
+                        name="email"
+                        th:field="*{email}"
+                      />
+                      <span class="highlight-span8"></span>
+                      <label class="lebal-email8">Email</label>
+                      <p
+                        th:errors="*{email}"
+                        class="text-danger"
+                        th:if="${#fields.hasErrors('email')}"
+                      ></p>
+                    </div>
+                  </div>
 
-    <!-- Bootstrap JS dan Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="assets/js/login.js"></script>
+                  <div class="group8">
+                    <label class="lebal-email9">Deskripsi Organisasi</label>
+                    <input
+                      required="true8"
+                      class="main-input9"
+                      type="text"
+                      id="description"
+                      name="description"
+                      th:field="*{description}"
+                    />
+                    <span class="highlight-span8"></span>
+                    <p
+                      th:errors="*{description}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('description')}"
+                    ></p>
+                  </div>
+
+                  <div class="container-8">
+                    <div class="group8">
+                      <input
+                        required="true8"
+                        class="main-input8"
+                        type="text"
+                        id="vision"
+                        name="vision"
+                        th:field="*{vision}"
+                      />
+                      <span class="highlight-span8"></span>
+                      <label class="lebal-email8">Visi Ukm</label>
+                      <p
+                        th:errors="*{vision}"
+                        class="text-danger"
+                        th:if="${#fields.hasErrors('vision')}"
+                      ></p>
+                    </div>
+                  </div>
+
+                  <div class="group8">
+                    <label class="lebal-email9">Misi UKM</label>
+                    <input
+                      required="true8"
+                      class="main-input9"
+                      type="text"
+                      id="mission"
+                      name="mission"
+                      th:field="*{mission}"
+                    />
+                    <span class="highlight-span8"></span>
+                    <p
+                      th:errors="*{mission}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('mission')}"
+                    ></p>
+                  </div>
+
+                  <div class="row group8">
+                    <label class="lebal-email9">Logo</label>
+                    <div class="col-9" style="flex-direction: row-reverse">
+                      <label class="file-upload-label">
+                        <div class="file-upload-design">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="200"
+                            height="60"
+                            viewBox="0 0 140 135"
+                            fill="none"
+                          >
+                            <path
+                              d="M56.0816 78.8857V56.3469H71.0367L52.3428 33.8082L33.649 56.3469H48.6041V78.8857H29.9102V78.6979C29.2821 78.7355 28.6839 78.8857 28.0408 78.8857C20.6039 78.8857 13.4716 75.9175 8.21296 70.6339C2.95429 65.3504 0 58.1843 0 50.7123C0 36.2574 10.8798 24.4771 24.8404 22.8618C26.0644 16.433 29.4798 10.6336 34.4992 6.46111C39.5186 2.28866 45.8282 0.00396693 52.3428 0C58.8583 0.00366378 65.169 2.28808 70.1896 6.46044C75.2103 10.6328 78.6272 16.4324 79.8527 22.8618C93.8133 24.4771 104.678 36.2574 104.678 50.7123C104.678 58.1843 101.724 65.3504 96.4652 70.6339C91.2066 75.9175 84.0743 78.8857 76.6374 78.8857C76.0093 78.8857 75.4036 78.7355 74.768 78.6979V78.8857H56.0816Z"
+                              fill="url(#paint0_linear_790_1359)"
+                            />
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_790_1359"
+                                x1="52"
+                                y1="-51.5"
+                                x2="52"
+                                y2="137.5"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop offset="0.0572917" stop-color="white" />
+                                <stop offset="0.791667" stop-color="#DB5F1E" />
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                          <p class="text-white">Drag and Drop OR</p>
+                          <span class="browse-button"><b>Browse</b></span>
+                          <input class="" accept="image/*" type="file" name="logo" id="logo" th:field="*{logo}" />
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="text-center mt-5" style="margin-bottom: 90px">
+                    <input
+                      type="submit"
+                      value="Submit"
+                      class="btn btn-secondary btn-sm btn-custom-login-white"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script th:src="@{js/login.js}"></script>
   </body>
 </html>

@@ -45,6 +45,7 @@ public class SpringSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((request) -> {
                     request
+                            .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/home")).authenticated()
                             .anyRequest().permitAll();
                 })
