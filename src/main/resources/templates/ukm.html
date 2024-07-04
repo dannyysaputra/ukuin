@@ -103,29 +103,8 @@
         <div id="page-content-wrapper" style="position: absolute;">
             <div class="container-fluid align-items-center">
                 <div class="row">
-                    <div class="col-3" style="margin-left: 40px;">
-                        <img th:src="@{images/ukm1-ukm.png}" class="ukm1" style="width: 100%;" alt="" onclick="location.href=''">
-                    </div>
-                    <div class="col-3" style="margin-left: 40px;">
-                        <img th:src="@{images/ukm2-ukm.png}" class="ukm2" style="width: 100%;" alt="" onclick="location.href=''">
-                    </div>
-                    <div class="col-3" style="margin-left: 40px;">
-                        <img th:src="@{images/ukm3-ukm.png}" class="ukm3" style="width: 100%;" alt="" onclick="location.href=''">
-                    </div>
-                    <div class="col-3" style="margin-left: 40px;">
-                        <img th:src="@{images/ukm4-ukm.png}" class="ukm4" style="width: 100%;" alt="" onclick="location.href=''">
-                    </div>
-                    <div class="col-3" style="margin-left: 40px;">
-                        <img th:src="@{images/ukm5-ukm.png}" class="ukm5" style="width: 100%;" alt="" onclick="location.href=''">
-                    </div>
-                    <div class="col-3" style="margin-left: 40px;">
-                        <img th:src="@{images/ukm6-ukm.png}" class="ukm6" style="width: 100%;" alt="" onclick="location.href=''">
-                    </div>
-                    <div class="col-3" style="margin-left: 40px;">
-                        <img th:src="@{images/ukm7-ukm.png}" class="ukm7" style="width: 100%;" alt="" onclick="location.href='daftar.html'">
-                    </div>
-                    <div class="col-3" style="margin-left: 40px;">
-                        <img th:src="@{images/ukm8-ukm.png}" class="ukm8" style="width: 100%;" alt="" onclick="location.href=''">
+                    <div class="col-3" style="margin-left: 40px;" th:each="user : ${users}">
+                        <img th:src="@{'/logos/' + ${user.logo}}" style="width: 100%;" alt="...">
                     </div>
                 </div>
             </div>

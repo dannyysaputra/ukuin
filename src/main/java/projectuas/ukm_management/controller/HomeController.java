@@ -6,7 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import projectuas.ukm_management.data.entity.User;
 import projectuas.ukm_management.service.UserService;
+
+import java.util.List;
 
 
 @Controller
@@ -16,8 +19,9 @@ public class HomeController {
     private UserService userService;
 
     @GetMapping("/ukm")
-    public String viewUkm(Model model) {
-        model.addAttribute("ukms", userService.findAllUsers());
+    public String showLogosList (Model model) {
+        List<User> users = userService.findAll();
+        model.addAttribute("users", users);
         return "ukm";
     }
 
