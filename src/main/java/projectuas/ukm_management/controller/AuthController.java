@@ -18,8 +18,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class AuthController {
@@ -53,58 +51,6 @@ public class AuthController {
         return "ukm/register_ukm";
     }
 
-    // handler method to handle user registration form submit request
-    // @PostMapping("/register/save")
-    // public String registration(@Valid @ModelAttribute("user") UserDto userDto,
-    //         BindingResult result,
-    //         Model model) {
-    //     User existingEmail = userService.findUserByEmail(userDto.getEmail());
-    //     User existingUsername = userService.findUserByUsername(userDto.getUsername());
-    //     Optional<User> existingEmail = Optional.ofNullable(userService.findUserByEmail(userDto.getEmail()));
-    //     Optional<User> existingUsername = Optional.ofNullable(userService.findUserByUsername(userDto.getUsername()));
-
-    //     if (existingEmail.isPresent() && existingEmail.get().getEmail() != null
-    //             && !existingEmail.get().getEmail().isEmpty()) {
-    //         result.rejectValue("email", null,
-    //                 "There is already an account registered with the same email");
-
-    //     }
-
-    //     if (existingUsername.isPresent() && existingUsername.get().getUsername() != null
-    //             && !existingUsername.get().getUsername().isEmpty()) {
-    //         result.rejectValue("username", null,
-    //                 "There is already an account registered with the same username");
-    //     }
-
-    //     if (existingEmail != null && existingEmail.getEmail() != null && !existingEmail.getEmail().isEmpty()) {
-    //         result.rejectValue("email", null,
-    //                 "There is already an account registered with the same email");
-    //     }
-
-    //     if (existingUsername != null && existingUsername.getUsername() != null
-    //             && !existingUsername.getUsername().isEmpty()) {
-    //         result.rejectValue("username", null,
-    //                 "There is already an account registered with the same username");
-    //     }
-
-    //     if (result.hasErrors()) {
-    //         model.addAttribute("user", userDto);
-    //         model.addAttribute("errorMessage", "Error");
-    //         return "/register";
-    //     }
-
-    //     userService.saveUser(userDto);
-    //     return "redirect:/login";
-    // }
-
-    // handler method to handle list of users
-    // @GetMapping("/users")
-    // public String users(Model model) {
-    //     List<UserDto> users = userService.findAllUsers();
-    //     model.addAttribute("users", users);
-    //     return "templates/users";
-    // }
-
     @PostMapping("/register/save")
     public String register(@Valid @ModelAttribute UserDto userDto, BindingResult result) {
         if (userDto.getLogo().isEmpty()) {
@@ -114,7 +60,6 @@ public class AuthController {
         if (result.hasErrors()) {
             return "ukm/register_ukm";
         }
-        System.out.println(userDto);
 
         MultipartFile file = userDto.getLogo();
         String fileName = file.getOriginalFilename();
@@ -147,6 +92,6 @@ public class AuthController {
 
         userService.saveUser(user);
 
-        return "redirect:/ukm";
+        return "redirect:/home";
     }
 }

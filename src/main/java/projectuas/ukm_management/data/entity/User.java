@@ -18,21 +18,6 @@ import java.util.Set;
 @Table(name="users")
 public class User
 {
-    private static final long serialVersionUID = 1L;
-
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long id;
-
-    // @Column(nullable=false)
-    // private String name;
-
-    // @Column(nullable=false, unique=true)
-    // private String username;
-
-    // @Column(nullable=false, unique=true)
-    // private String email;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -61,7 +46,7 @@ public class User
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Event> events;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade= {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name="users_roles",
             joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},

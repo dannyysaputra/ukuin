@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import projectuas.ukm_management.data.entity.User;
 import projectuas.ukm_management.service.UserService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
