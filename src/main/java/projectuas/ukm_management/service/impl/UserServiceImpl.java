@@ -10,6 +10,7 @@ import projectuas.ukm_management.data.repository.UserRepository;
 import projectuas.ukm_management.dto.UserDto;
 import projectuas.ukm_management.service.UserService;
 
+// import java.util.Arrays;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +20,6 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
-    private UserService userService;
     private PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository,
@@ -28,24 +28,6 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
     }
-
-    // @Override
-    // public void saveUser(UserDto userDto) {
-    //     User user = new User();
-    //     user.setName(userDto.getName());
-    //     user.setUsername(userDto.getUsername());
-    //     user.setEmail(userDto.getEmail());
-        // user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-
-    //     Role role = roleRepository.findByName("ROLE_ADMIN");
-
-    //     if (role == null) {
-    //         role = checkRoleExist();
-    //     }
-    //     user.setRoles(Arrays.asList(role));
-
-    //     userRepository.save(user);
-    // }
 
     @Override
     public void saveUser(User user) {
@@ -57,9 +39,24 @@ public class UserServiceImpl implements UserService {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Arrays.asList(role));
+        // user.setRoles(Arrays.asList(role));
         System.out.println(user);
 
         userRepository.save(user);
+    }
+
+    @Override
+    public User update(User updatedUkm, Long id) {
+        return userRepository.findById(id).map(ukm -> {
+            ukm.setName(updatedUkm.getName());
+            ukm.setEmail(updatedUkm.getEmail());
+            ukm.setDescription(updatedUkm.getDescription());
+            ukm.setVision(updatedUkm.getVision());
+            ukm.setMission(updatedUkm.getMission());
+            ukm.setLogo(updatedUkm.getLogo());
+
+            return userRepository.save(ukm);
+        }).orElse(null);
     }
 
     private Role checkRoleExist() {
@@ -69,8 +66,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public User findUserByEmail(String email) {
-        return userService.findUserByEmail(email);
+        return userRepository.findByEmail(email);
     }
 
     @Override
@@ -84,6 +86,11 @@ public class UserServiceImpl implements UserService {
         return users.stream()
                 .map((user) -> mapToUserDto(user))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     private UserDto mapToUserDto(User user) {
