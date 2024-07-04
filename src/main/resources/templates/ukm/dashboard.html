@@ -185,7 +185,7 @@
           </div>
           <div class="col-lg-1"></div>
         </div>
-        <div class="right-logo-outer"></div>
+        <!-- <div class="right-logo-outer"></div> -->
         <img class="right-logo-image" th:src="@{'/logos/' + ${ukm.logo}}" />
         <div class="svg-container">
           <svg
@@ -375,7 +375,7 @@
         <div class="row">
           <div class="col-lg-8"></div>
           <div class="col-lg-4" style="z-index: 3; margin-left: 87%">
-            <a href="edit.html" style="cursor: pointer">
+            <a th:href="@{/edit-ukm/{id}(id = ${ukm.id}) }" style="cursor: pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="45"
