@@ -300,8 +300,11 @@ h1.text-title {
 }
 
 .right-image {
-  width: 2000px;
-  height: 1000px;
+  width: 700px;
+  height: 500px;
+  float: right;
+  position: relative;
+  top: -200px;
 }
 
 .left-logo-image {
