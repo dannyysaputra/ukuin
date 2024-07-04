@@ -393,8 +393,8 @@ footer {
   width: 100%;
   text-align: left;
   font: bold 16px sans-serif;
-  padding: 50px 50px 60px 50px;
-  top: 680px;
+  padding: 50px 50px 60px  50px;
+  top: 2500px;
   padding-left: 200px;
   position: relative;
 }

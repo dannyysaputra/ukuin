@@ -86,6 +86,11 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
     private UserDto mapToUserDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setName(user.getName());
