@@ -29,20 +29,35 @@ public class UserServiceImpl implements UserService {
         this.roleRepository = roleRepository;
     }
 
-    @Override
-    public void saveUser(UserDto userDto) {
-        User user = new User();
-        user.setName(userDto.getName());
-        user.setUsername(userDto.getUsername());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+    // @Override
+    // public void saveUser(UserDto userDto) {
+    //     User user = new User();
+    //     user.setName(userDto.getName());
+    //     user.setUsername(userDto.getUsername());
+    //     user.setEmail(userDto.getEmail());
+        // user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
+    //     Role role = roleRepository.findByName("ROLE_ADMIN");
+
+    //     if (role == null) {
+    //         role = checkRoleExist();
+    //     }
+    //     user.setRoles(Arrays.asList(role));
+
+    //     userRepository.save(user);
+    // }
+
+    @Override
+    public void saveUser(User user) {
         Role role = roleRepository.findByName("ROLE_ADMIN");
 
         if (role == null) {
             role = checkRoleExist();
         }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Arrays.asList(role));
+        System.out.println(user);
 
         userRepository.save(user);
     }
@@ -60,7 +75,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByUsername(String username) {
-        return userService.findUserByUsername(username);
+        return userRepository.findByName(username);
     }
 
     @Override
@@ -75,7 +90,8 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = new UserDto();
         userDto.setName(user.getName());
         userDto.setEmail(user.getEmail());
-        userDto.setUsername(user.getUsername());
+        userDto.setName(user.getName());
+        // userDto.setUsername(user.getUsername());
         return userDto;
     }
 }

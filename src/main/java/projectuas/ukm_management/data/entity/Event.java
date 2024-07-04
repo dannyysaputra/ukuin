@@ -49,6 +49,6 @@ public class Event {
     private Date end_date;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "ukm_id", nullable = false)
-    private Ukm ukm;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
