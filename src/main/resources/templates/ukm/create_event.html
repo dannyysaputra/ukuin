@@ -1,1242 +1,1467 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Unit</title>
-    <link rel="icon" th:href="@{images/logo.png}" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="icon" th:href="@{images/logo.png}" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" type="text/css" th:href="@{css/style.css}" />
     <style>
+      body {
+        overflow-x: hidden;
+        /* font-family: 'Inter', sans-serif; */
+      }
 
-        body {
-            overflow-x: hidden;
-            /* font-family: 'Inter', sans-serif; */
-        }
+      /* css beneran */
+      #wrapper {
+        padding-left: 0;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+      }
 
-        /* css beneran */
+      #wrapper.toggled {
+        padding-left: 250px;
+      }
+
+      #sidebar-wrapper {
+        z-index: 1000;
+        position: fixed;
+        left: 250px;
+        height: 100%;
+        margin-left: -250px;
+        overflow-y: auto;
+        background: #000;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        background: linear-gradient(
+          -249.57deg,
+          rgba(219, 95, 30, 0.84) 15.85%,
+          rgba(173, 0, 0, 0.84) 80.42%
+        );
+      }
+
+      #wrapper.toggled #sidebar-wrapper {
+        width: 187px;
+      }
+
+      #page-content-wrapper {
+        width: 100%;
+        position: absolute;
+        padding: 15px;
+      }
+
+      #wrapper.toggled #page-content-wrapper {
+        position: absolute;
+        margin-right: -250px;
+      }
+
+      .header-tel-u {
+        height: 400px;
+        background: linear-gradient(107deg, #a80000 38.42%, #db5f1e 121.01%);
+      }
+
+      /* Sidebar Style */
+
+      .sidebar-nav {
+        position: fixed;
+        top: 0;
+        width: 90;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .sidebar-nav li {
+        text-indent: 20px;
+        line-height: 40px;
+      }
+
+      .sidebar-nav li a {
+        display: block;
+        text-decoration: none;
+        color: #fff;
+      }
+
+      .sidebar-nav li a:hover {
+        text-decoration: none;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .sidebar-nav li a:active,
+      .sidebar-nav li a:focus {
+        text-decoration: none;
+        color: red;
+      }
+
+      .sidebar-nav > .sidebar-brand {
+        height: 65px;
+        font-size: 18px;
+        line-height: 60px;
+      }
+
+      .sidebar-nav > .sidebar-brand a {
+        color: #fff;
+      }
+
+      .sidebar-nav > .sidebar-brand a:hover {
+        color: #fff;
+        background: none;
+      }
+
+      .sidebar-link,
+      .sidebar-link * {
+        box-sizing: border-box;
+      }
+      .sidebar-link {
+        background: #a80000;
+        border-radius: 107px 0px 0px 107px;
+        width: 142px;
+        height: 64px;
+        position: relative;
+        left: 45px;
+        top: auto;
+        margin-bottom: 26px;
+        z-index: 1;
+        cursor: pointer;
+        color: #ffffff;
+      }
+
+      .sidebar-link.active {
+        background: #fff;
+        color: #000;
+      }
+
+      .sidebar-link.active {
+        background: #fff;
+        color: #000;
+      }
+
+      .sidebar-link:hover {
+        background: #fff;
+        color: #000;
+      }
+
+      .sidebar-link-text,
+      .sidebar-link-text * {
+        box-sizing: border-box;
+      }
+      .sidebar-link-text {
+        text-align: -webkit-center;
+        font: 500 20px "Inter-Medium", sans-serif;
+        position: relative;
+        left: -1px;
+        top: 10px;
+      }
+
+      .rectangle-icon {
+        width: 90px;
+        height: 90px;
+        transform: rotate(-48.47deg);
+        transform-origin: 0 0;
+        background: linear-gradient(
+          142deg,
+          #d86636 0%,
+          rgba(216, 102, 54, 0) 100%
+        );
+        margin-left: 20%;
+      }
+
+      .rectangle-130,
+      .rectangle-130 * {
+        box-sizing: border-box;
+      }
+      .rectangle-130 {
+        background: linear-gradient(
+          141.52deg,
+          rgba(216, 102, 54, 1) 0%,
+          rgba(216, 102, 54, 0) 100%
+        );
+        width: 113.68px;
+        height: 113.68px;
+        position: relative;
+        transform-origin: 0 0;
+        transform: rotate(-169.15deg) scale(1, 1);
+      }
+
+      .svg-container {
+        width: 52px;
+        height: 53px;
+        left: 68%;
+        top: 0px;
+        position: absolute;
+        z-index: 1;
+      }
+
+      h1.text-title {
+        position: relative; /* posisis bgus*/
+        z-index: 2; /* svg pengaturan*/
+        font-size: 70px;
+        font-weight: 700;
+        color: #fff;
+        margin-left: 60px;
+      }
+
+      .sidebar-header {
+        background: #cd4e28;
+        width: 100%;
+        height: 160px;
+        position: absolute;
+        flex-shrink: 0;
+        border-radius: 0px 0px 210px 210px;
+      }
+
+      .sidebar-icon {
+        width: 90px;
+        height: 90px;
+        left: 50px !important;
+        top: 32px !important;
+        background: white;
+        border-radius: 9999px;
+        position: absolute;
+      }
+
+      .sidebar-icon-image {
+        z-index: 9999;
+        width: 60px;
+        height: 70px;
+        left: 15px;
+        top: 7.87px;
+        position: absolute;
+      }
+
+      .sidebar-logout {
+        position: fixed;
+        left: 40px;
+        bottom: 10px;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .sidebar-logout-icon {
+        left: 40px;
+        position: absolute;
+        color: white;
+        font-size: 16px;
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        top: 5px;
+      }
+      .card-img-p-2 {
+        padding: 8px;
+        border-radius: 20px;
+      }
+
+      .card-kepengurusan {
+        border: 1px solid #000;
+        border-radius: 15px;
+        height: 320px;
+      }
+
+      .card-kepengurusan-title {
+        font-weight: 400;
+        font-size: 20px;
+      }
+
+      .card-kepengurusan-desc {
+        font-weight: 400;
+        font-size: 16px;
+        margin-top: 10px;
+      }
+
+      .right-logo-outer1 {
+        width: 80px;
+        height: 40px;
+        left: 81%;
+        top: 48px;
+        position: absolute;
+        align-items: end;
+        /* background: white; */
+        border-radius: 500px;
+        z-index: 9999;
+      }
+
+      .right-logo-outer {
+        width: 70px;
+        height: 70px;
+        left: 90%;
+        top: 45px;
+        position: absolute;
+        align-items: end;
+        background: white;
+        border-radius: 9999px;
+        z-index: 9999;
+      }
+
+      .right-logo-image {
+        width: 60px;
+        height: 60px;
+        left: 90.2%;
+        top: 48px;
+        position: absolute;
+        z-index: 9999;
+      }
+
+      .right-image {
+        width: 2000px;
+        height: 1000px;
+      }
+
+      .left-logo-image {
+        width: 60px;
+        height: 60px;
+        /* left: 90.2%; */
+        top: 80px;
+        position: absolute;
+        z-index: 9999;
+      }
+
+      .custom-label {
+        font-weight: 500;
+        margin-bottom: 12px;
+        font-size: 20px;
+      }
+
+      .custom-input {
+        border: 1px solid #cd502f;
+      }
+
+      .btn-custom {
+        background-color: #db5f1e;
+        color: #fff;
+        border: none;
+        border-radius: 15px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      .btn-custom:hover {
+        background-color: #fff;
+        color: #db5f1e;
+        border: 1px solid #db5f1e;
+      }
+
+      .btn-custom-secondary {
+        background-color: #fff;
+        color: #000;
+        border: none;
+        border-radius: 15px;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+
+      .btn-custom-secondary:hover {
+        color: #fff;
+        border: 1px solid #fff;
+        background-color: #db5f1e;
+      }
+
+      .custom-modal {
+        border-radius: 20px;
+        background: linear-gradient(258deg, #ad0000 -6.59%, #d86636 84.63%);
+        color: white;
+      }
+
+      @media (min-width: 768px) {
         #wrapper {
-            padding-left: 0;
-            -webkit-transition: all 0.5s ease;
-            -moz-transition: all 0.5s ease;
-            -o-transition: all 0.5s ease;
-            transition: all 0.5s ease;
+          padding-left: 187px;
         }
 
         #wrapper.toggled {
-            padding-left: 250px;
+          padding-left: 0;
         }
 
         #sidebar-wrapper {
-            z-index: 1000;
-            position: fixed;
-            left: 250px;
-            height: 100%;
-            margin-left: -250px;
-            overflow-y: auto;
-            background: #000;
-            -webkit-transition: all 0.5s ease;
-            -moz-transition: all 0.5s ease;
-            -o-transition: all 0.5s ease;
-            transition: all 0.5s ease;
-            background: linear-gradient(
-                    -249.57deg,
-                    rgba(219, 95, 30, 0.84) 15.85%,
-                    rgba(173, 0, 0, 0.84) 80.42%
-            );
+          width: 187px;
         }
 
         #wrapper.toggled #sidebar-wrapper {
-            width: 187px;
+          width: 0;
         }
 
         #page-content-wrapper {
-            width: 100%;
-            position: absolute;
-            padding: 15px;
-
+          padding: 20px;
+          position: relative;
         }
 
         #wrapper.toggled #page-content-wrapper {
-            position: absolute;
-            margin-right: -250px;
+          position: relative;
+          margin-right: 0;
         }
-
-        .header-tel-u {
-            height: 400px;
-            background: linear-gradient(107deg, #a80000 38.42%, #db5f1e 121.01%);
-        }
-
-        /* Sidebar Style */
-
-        .sidebar-nav {
-            position: fixed;
-            top: 0;
-            width: 90;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .sidebar-nav li {
-            text-indent: 20px;
-            line-height: 40px;
-        }
-
-        .sidebar-nav li a {
-            display: block;
-            text-decoration: none;
-            color: #fff;
-        }
-
-        .sidebar-nav li a:hover {
-            text-decoration: none;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .sidebar-nav li a:active,
-        .sidebar-nav li a:focus {
-            text-decoration: none;
-            color: red;
-        }
-
-        .sidebar-nav > .sidebar-brand {
-            height: 65px;
-            font-size: 18px;
-            line-height: 60px;
-        }
-
-        .sidebar-nav > .sidebar-brand a {
-            color: #fff;
-        }
-
-        .sidebar-nav > .sidebar-brand a:hover {
-            color: #fff;
-            background: none;
-        }
-
-        .sidebar-link,
-        .sidebar-link * {
-            box-sizing: border-box;
-        }
-        .sidebar-link {
-            background: #a80000;
-            border-radius: 107px 0px 0px 107px;
-            width: 142px;
-            height: 64px;
-            position: relative;
-            left: 45px;
-            top: auto;
-            margin-bottom: 26px;
-            z-index: 1;
-            cursor: pointer;
-            color: #ffffff;
-        }
-
-
-
-        .sidebar-link.active {
-            background: #fff;
-            color: #000;
-        }
-
-        .sidebar-link.active {
-            background: #fff;
-            color: #000;
-        }
-
-        .sidebar-link:hover {
-            background: #fff;
-            color: #000;
-        }
-
-        .sidebar-link-text,
-        .sidebar-link-text * {
-            box-sizing: border-box;
-        }
-        .sidebar-link-text {
-            text-align: -webkit-center;
-            font: 500 20px 'Inter-Medium', sans-serif;
-            position: relative;
-            left: -1px;
-            top: 10px;
-        }
-
-
-        .rectangle-icon {
-            width: 90px;
-            height: 90px;
-            transform: rotate(-48.47deg);
-            transform-origin: 0 0;
-            background: linear-gradient(142deg, #d86636 0%, rgba(216, 102, 54, 0) 100%);
-            margin-left: 20%;
-        }
-
-        .rectangle-130,
-        .rectangle-130 * {
-            box-sizing: border-box;
-        }
-        .rectangle-130 {
-            background: linear-gradient(
-                    141.52deg,
-                    rgba(216, 102, 54, 1) 0%,
-                    rgba(216, 102, 54, 0) 100%
-            );
-            width: 113.68px;
-            height: 113.68px;
-            position: relative;
-            transform-origin: 0 0;
-            transform: rotate(-169.15deg) scale(1, 1);
-        }
-
-        .svg-container {
-            width: 52px;
-            height: 53px;
-            left: 68%;
-            top: 0px;
-            position: absolute;
-            z-index: 1;
-        }
-
-        h1.text-title {
-            position: relative; /* posisis bgus*/
-            z-index: 2; /* svg pengaturan*/
-            font-size: 70px;
-            font-weight: 700;
-            color: #fff;
-            margin-left: 60px;
-        }
-
-        .sidebar-header {
-            background: #cd4e28;
-            width: 100%;
-            height: 160px;
-            position: absolute;
-            flex-shrink: 0;
-            border-radius: 0px 0px 210px 210px;
-        }
-
-        .sidebar-icon {
-            width: 90px;
-            height: 90px;
-            left: 50px !important;
-            top: 32px !important;
-            background: white;
-            border-radius: 9999px;
-            position: absolute;
-        }
-
-        .sidebar-icon-image {
-            z-index: 9999;
-            width: 60px;
-            height: 70px;
-            left: 15px;
-            top: 7.87px;
-            position: absolute;
-        }
-
-        .sidebar-logout {
-            position: fixed;
-            left: 40px;
-            bottom: 10px;
-            width: 100%;
-            cursor: pointer;
-        }
-
-        .sidebar-logout-icon {
-            left: 40px;
-            position: absolute;
-            color: white;
-            font-size: 16px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            top: 5px;
-        }
-        .card-img-p-2 {
-            padding: 8px;
-            border-radius: 20px;
-        }
-
-        .card-kepengurusan {
-            border: 1px solid #000;
-            border-radius: 15px;
-            height: 320px;
-        }
-
-        .card-kepengurusan-title {
-            font-weight: 400;
-            font-size: 20px;
-        }
-
-        .card-kepengurusan-desc {
-            font-weight: 400;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        .right-logo-outer1 {
-            width: 80px;
-            height: 40px;
-            left: 81%;
-            top: 48px;
-            position: absolute;
-            align-items: end;
-            /* background: white; */
-            border-radius: 500px;
-            z-index: 9999;
-        }
-
-        .right-logo-outer {
-            width: 70px;
-            height: 70px;
-            left: 90%;
-            top: 45px;
-            position: absolute;
-            align-items: end;
-            background: white;
-            border-radius: 9999px;
-            z-index: 9999;
-        }
-
-
-        .right-logo-image {
-            width: 60px;
-            height: 60px;
-            left: 90.2%;
-            top: 48px;
-            position: absolute;
-            z-index: 9999;
-        }
-
-        .right-image {
-            width: 2000px;
-            height: 1000px;
-        }
-
-        .left-logo-image {
-            width: 60px;
-            height: 60px;
-            /* left: 90.2%; */
-            top: 80px;
-            position: absolute;
-            z-index: 9999;
-        }
-
-        .custom-label {
-            font-weight: 500;
-            margin-bottom: 12px;
-            font-size: 20px;
-        }
-
-        .custom-input {
-            border: 1px solid #CD502F;
-        }
-
-        .btn-custom {
-            background-color: #DB5F1E;
-            color: #fff;
-            border: none;
-            border-radius: 15px;
-            padding-left: 30px;
-            padding-right: 30px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-        .btn-custom:hover {
-            background-color: #fff;
-            color: #DB5F1E;
-            border: 1px solid #DB5F1E;
-        }
-
-        .btn-custom-secondary {
-            background-color: #fff;
-            color: #000;
-            border: none;
-            border-radius: 15px;
-            padding-left: 30px;
-            padding-right: 30px;
-        }
-
-        .btn-custom-secondary:hover {
-            color: #fff;
-            border: 1px solid #fff;
-            background-color: #DB5F1E;
-        }
-
-        .custom-modal {
-            border-radius: 20px;
-            background: linear-gradient(258deg, #AD0000 -6.59%, #D86636 84.63%);
-            color: white;
-        }
-
-
-        @media (min-width: 768px) {
-            #wrapper {
-                padding-left: 187px;
-            }
-
-            #wrapper.toggled {
-                padding-left: 0;
-            }
-
-            #sidebar-wrapper {
-                width: 187px;
-            }
-
-            #wrapper.toggled #sidebar-wrapper {
-                width: 0;
-            }
-
-            #page-content-wrapper {
-                padding: 20px;
-                position: relative;
-            }
-
-            #wrapper.toggled #page-content-wrapper {
-                position: relative;
-                margin-right: 0;
-            }
-        }
-
-
-        #sidebar-wrapper1 {
-            z-index: 1000;
-            position: fixed;
-            left: 250px;
-            height: 100%;
-            margin-left: -250px;
-            overflow-y: auto;
-            -webkit-transition: all 0.5s ease;
-            -moz-transition: all 0.5s ease;
-            -o-transition: all 0.5s ease;
-            transition: all 0.5s ease;
-        }
-
-        #sidebar-wrapper1 {
-            width: 187px;
-        }
-
-        #page-content-wrapper1 {
-            width: 100%;
-            position: absolute;
-            padding: 15px;
-        }
-
-        #page-content-wrapper1 {
-            position: absolute;
-            /* margin-right: -250px; */
-        }
-
-
-        .sidebar-icon1 {
-            width: 90px;
-            height: 90px;
-            left: 50px !important;
-            top: 32px !important;
-            background: white;
-            border-radius: 9999px;
-            position: absolute;
-        }
-
-        .sidebar-icon1-image {
-            z-index: 9999;
-            width: 60px;
-            height: 70px;
-            left: 15px;
-            top: 7.87px;
-            position: absolute;
-        }
-
-        .sidebar-header1 {
-            background: #cd4e28;
-            width: 13%;
-            height: 160px;
-            position: absolute;
-            flex-shrink: 0;
-            border-radius: 0px 0px 210px 210px;
-        }
-
-        .container_ {
-            padding: 64px;
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both
-        }
-
-        .column-66 {
-            float: left;
-            width: 66.66666%;
-            padding: 20px;
-        }
-
-        .column-66 h1{
-            color: #cd4e28;
-        }
-
-        .column-33 {
-            float: left;
-            width: 33.33333%;
-            padding: 20px;
-        }
-
-        .large-font {
-            font-size: 80px;
-        }
-
-        .xlarge-font {
-            font-size: 90px
-        }
-
-        .button_ {
-            border: none;
-            color: white;
-            padding: 14px 28px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #cd4e28;
-        }
-
-        img {
-            display: block;
-            height: auto;
-            max-width: 100%;
-        }
-
-
-        /* footerrrr */
+      }
+
+      #sidebar-wrapper1 {
+        z-index: 1000;
+        position: fixed;
+        left: 250px;
+        height: 100%;
+        margin-left: -250px;
+        overflow-y: auto;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+      }
+
+      #sidebar-wrapper1 {
+        width: 187px;
+      }
+
+      #page-content-wrapper1 {
+        width: 100%;
+        position: absolute;
+        padding: 15px;
+      }
+
+      #page-content-wrapper1 {
+        position: absolute;
+        /* margin-right: -250px; */
+      }
+
+      .sidebar-icon1 {
+        width: 90px;
+        height: 90px;
+        left: 50px !important;
+        top: 32px !important;
+        background: white;
+        border-radius: 9999px;
+        position: absolute;
+      }
+
+      .sidebar-icon1-image {
+        z-index: 9999;
+        width: 60px;
+        height: 70px;
+        left: 15px;
+        top: 7.87px;
+        position: absolute;
+      }
+
+      .sidebar-header1 {
+        background: #cd4e28;
+        width: 13%;
+        height: 160px;
+        position: absolute;
+        flex-shrink: 0;
+        border-radius: 0px 0px 210px 210px;
+      }
+
+      .container_ {
+        padding: 64px;
+      }
+
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      .column-66 {
+        float: left;
+        width: 66.66666%;
+        padding: 20px;
+      }
+
+      .column-66 h1 {
+        color: #cd4e28;
+      }
+
+      .column-33 {
+        float: left;
+        width: 33.33333%;
+        padding: 20px;
+      }
+
+      .large-font {
+        font-size: 80px;
+      }
+
+      .xlarge-font {
+        font-size: 90px;
+      }
+
+      .button_ {
+        border: none;
+        color: white;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #cd4e28;
+      }
+
+      img {
+        display: block;
+        height: auto;
+        max-width: 100%;
+      }
+
+      /* footerrrr */
+      footer {
+        position: fixed;
+        width: 300px;
+        height: auto;
+        bottom: 0;
+      }
+
+      .footer {
+        background: linear-gradient(107deg, #a80000 38.42%, #db5f1e 121.01%);
+        box-sizing: border-box;
+        width: 100%;
+        text-align: left;
+        font: bold 16px sans-serif;
+        padding: 50px 50px 60px 50px;
+        margin-top: 80px;
+        padding-left: 200px;
+      }
+
+      .footer .footer-left,
+      .footer .footer-center,
+      .footer .footer-right {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      @media (max-height: 800px) {
         footer {
-            position: fixed;
-            width: 300px;
-            height: auto;
-            bottom: 0;
+          position: static;
         }
 
-        .footer {
-            background: linear-gradient(107deg, #a80000 38.42%, #db5f1e 121.01%);
-            box-sizing: border-box;
-            width: 100%;
-            text-align: left;
-            font: bold 16px sans-serif;
-            padding: 50px 50px 60px 50px;
-            margin-top: 80px;
-            padding-left: 200px;
+        header {
+          padding-top: 40px;
         }
+      }
 
+      .footer h1 {
+        color: #f5f5f5;
+        margin: 0;
+        padding-bottom: 20px;
+        font-family: "Inter", sans-serif;
+      }
 
+      .footer h3 {
+        color: #f5f5f5;
+        margin: 0;
+        padding-bottom: 20px;
+        font-family: Georgia, "Time New Roman", Times, serif;
+      }
 
+      .footer .footer-copyright {
+        color: #8f9296;
+        font-size: 14px;
+        font-weight: normal;
+        margin: 0;
+        padding-top: 10%;
+      }
+
+      .footer .footer-left {
+        width: 35%;
+      }
+
+      .footer .footer-left i {
+        background-color: white;
+        color: #cd4e28;
+        font-size: 25px;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 42px;
+        margin: 10px 15px;
+        vertical-align: middle;
+      }
+
+      .footer .footer-left i.fa-envelope {
+        font-size: 17px;
+        line-height: 38px;
+      }
+
+      .footer .footer-left p {
+        display: inline-block;
+        color: #ffffff;
+        vertical-align: middle;
+        margin: 0px;
+      }
+
+      .footer .footer-left p span {
+        display: block;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 2;
+      }
+
+      .footer .footer-left p a {
+        color: rgb(22, 255, 177);
+        text-decoration: none;
+      }
+
+      .footer .footer-right {
+        width: 50%;
+      }
+
+      .footer .footer-about {
+        line-height: 20px;
+        color: #c9cccf;
+        font-size: 13px;
+        font-weight: normal;
+        margin: 0px;
+        padding-left: 80px;
+      }
+
+      .footer .footer-about span {
+        display: block;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .footer .footer-media {
+        margin-top: 5px;
+        padding-left: 80px;
+        padding-top: 50px;
+        padding-bottom: 30px;
+      }
+
+      .footer .footer-media a {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        background-color: #fff;
+        border-radius: 50%;
+        font-size: 20px;
+        color: #cd4e28;
+        text-align: center;
+        line-height: 50px;
+        margin-right: 3px;
+        margin-bottom: 5px;
+      }
+
+      .footer .footer-media a:hover {
+        background-color: wheat;
+      }
+
+      @media (max-width: 880px) {
         .footer .footer-left,
         .footer .footer-center,
         .footer .footer-right {
-            display: inline-block;
-            vertical-align: top;
+          display: block;
+          width: 100%;
+          margin-bottom: 40px;
+          text-align: left;
         }
 
-        @media (max-height:800px) {
-            footer {
-                position: static;
-            }
-
-            header {
-                padding-top: 40px;
-            }
+        .footer .footer-center i {
+          margin-left: 0px;
         }
+      }
+      .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        height: 300px; /* Should be removed. Only for demonstration */
+      }
 
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
 
-        .footer h1 {
-            color: #f5f5f5;
-            margin: 0;
-            padding-bottom: 20px;
-            font-family: 'Inter', sans-serif;
-        }
+      /* botton dash */
+      /* <reset-style> ============================ */
+      button {
+        border: none;
+        background: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      /* <main-style> ============================ */
+      .primary-button {
+        min-width: 111px;
+        height: 56px;
+        border-radius: 40px;
+        background: #ffffff;
+        padding: 15px 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        letter-spacing: -0.32px;
+        transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+        position: relative;
+      }
 
-        .footer h3 {
-            color: #f5f5f5;
-            margin: 0;
-            padding-bottom: 20px;
-            font-family: Georgia, 'Time New Roman', Times, serif;
-        }
+      .primary-button::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        border-radius: 40px;
+        background: linear-gradient(
+          69deg,
+          #f81a1a -4.77%,
+          rgb(237, 111, 15) 46.72%,
+          #ffce5c 90.23%,
+          #7effaf 134.46%
+        );
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.2s ease-in-out;
+      }
 
+      .primary-button:hover {
+        background: transparent;
+        color: #000;
+      }
 
-        .footer .footer-copyright {
-            color: #8f9296;
-            font-size: 14px;
-            font-weight: normal;
-            margin: 0;
-            padding-top: 10%;
-        }
+      .primary-button:hover::before {
+        opacity: 1;
+      }
 
-        .footer .footer-left {
-            width: 35%;
-        }
+      /* kotak */
+      .kotak {
+        box-shadow: 4px 4px 4px rgba(179, 177, 177, 0.8);
+        padding: 10px;
+        border: 1px solid #d7ada1;
+        border-radius: 10px;
+      }
 
-        .footer .footer-left i {
-            background-color: white;
-            color: #cd4e28;
-            font-size: 25px;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 42px;
-            margin: 10px 15px;
-            vertical-align: middle;
-        }
+      .btn-inline {
+        background-color: #43d836;
+        color: #fff;
+        border: none;
+        border-radius: 15px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
 
-        .footer .footer-left i.fa-envelope {
-            font-size: 17px;
-            line-height: 38px;
-        }
+      /* checkbox */
 
-        .footer .footer-left p {
-            display: inline-block;
-            color: #ffffff;
-            vertical-align: middle;
-            margin: 0px;
-        }
+      /* checkbox settings 👇 */
 
-        .footer .footer-left p span {
-            display: block;
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 2;
-        }
-
-        .footer .footer-left p a {
-            color: rgb(22, 255, 177);
-            text-decoration: none;
-        }
-
-        .footer .footer-right {
-            width: 50%;
-        }
-
-        .footer .footer-about {
-            line-height: 20px;
-            color: #c9cccf;
-            font-size: 13px;
-            font-weight: normal;
-            margin: 0px;
-            padding-left: 80px;
-        }
-
-        .footer .footer-about span {
-            display: block;
-            color: #ffffff;
-            font-size: 18px;
-            font-weight: bold;
-
-        }
-
-        .footer .footer-media {
-            margin-top: 5px;
-            padding-left: 80px;
-            padding-top: 50px;
-            padding-bottom: 30px;
-        }
-
-        .footer .footer-media a {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            background-color: #fff;
-            border-radius: 50%;
-            font-size: 20px;
-            color: #cd4e28;
-            text-align: center;
-            line-height: 50px;
-            margin-right: 3px;
-            margin-bottom: 5px;
-        }
-
-        .footer .footer-media a:hover {
-            background-color: wheat;
-        }
-
-        @media (max-width: 880px) {
-
-            .footer .footer-left,
-            .footer .footer-center,
-            .footer .footer-right {
-                display: block;
-                width: 100%;
-                margin-bottom: 40px;
-                text-align: left;
-            }
-
-            .footer .footer-center i {
-                margin-left: 0px;
-            }
-        }
-        .column {
-            float: left;
-            width: 50%;
-            padding: 10px;
-            height: 300px; /* Should be removed. Only for demonstration */
-        }
-
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        /* botton dash */
-        /* <reset-style> ============================ */
-        button {
-            border: none;
-            background: none;
-            padding: 0;
-            margin: 0;
-            cursor: pointer;
-            font-family: inherit;
-        }
-        /* <main-style> ============================ */
-        .primary-button {
-            min-width: 111px;
-            height: 56px;
-            border-radius: 40px;
-            background: #ffffff;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: black;
-            font-size: 16px;
-            font-weight: 400;
-            line-height: 1.5;
-            letter-spacing: -0.32px;
-            transition: background .2s ease-in-out, color .2s ease-in-out;
-            position: relative;
-        }
-
-        .primary-button::before {
-            content: '';
-            width: 100%;
-            height: 100%;
-            border-radius: 40px;
-            background: linear-gradient(69deg, #f81a1a -4.77%, rgb(237, 111, 15) 46.72%, #ffce5c 90.23%, #7effaf 134.46%);
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            z-index: -1;
-            transition: opacity .2s ease-in-out;
-        }
-
-        .primary-button:hover {
-            background: transparent;
-            color: #000;
-        }
-
-        .primary-button:hover::before {
-            opacity: 1;
-        }
-
-        /* kotak */
-        .kotak{
-            box-shadow: 4px 4px 4px rgba(179, 177, 177, 0.8);
-            padding: 10px;
-            border: 1px solid #d7ada1;
-            border-radius: 10px;
-        }
-
-        .btn-inline{
-            background-color: #43D836;
-            color: #fff;
-            border: none;
-            border-radius: 15px;
-            padding-left: 30px;
-            padding-right: 30px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-
-
-        }
-
+      .ui-checkbox {
+        --primary-color: #db5f1e;
+        --secondary-color: #fff;
+        --primary-hover-color: #db5f1e;
         /* checkbox */
+        --checkbox-diameter: 25px;
+        --checkbox-border-radius: 3px;
+        --checkbox-border-color: #db5f1e;
+        --checkbox-border-width: 2px;
+        --checkbox-border-style: solid;
+        /* checkmark */
+        --checkmark-size: 2.2;
+      }
 
-        /* checkbox settings 👇 */
+      .ui-checkbox,
+      .ui-checkbox *,
+      .ui-checkbox *::before,
+      .ui-checkbox *::after {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
 
-        .ui-checkbox {
-            --primary-color: #DB5F1E;
-            --secondary-color: #fff;
-            --primary-hover-color: #DB5F1E;
-            /* checkbox */
-            --checkbox-diameter: 25px;
-            --checkbox-border-radius: 3px;
-            --checkbox-border-color: #DB5F1E;
-            --checkbox-border-width: 2px;
-            --checkbox-border-style: solid;
-            /* checkmark */
-            --checkmark-size: 2.2;
-        }
+      .ui-checkbox {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: var(--checkbox-diameter);
+        height: var(--checkbox-diameter);
+        border-radius: var(--checkbox-border-radius);
+        background: var(--secondary-color);
+        border: var(--checkbox-border-width) var(--checkbox-border-style)
+          var(--checkbox-border-color);
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+        cursor: pointer;
+        position: relative;
+      }
 
-        .ui-checkbox,
-        .ui-checkbox *,
-        .ui-checkbox *::before,
-        .ui-checkbox *::after {
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-        }
+      .ui-checkbox::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        -webkit-box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5)
+          var(--primary-color);
+        box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5)
+          var(--primary-color);
+        border-radius: inherit;
+        opacity: 0;
+        -webkit-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+        -o-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+        transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+      }
 
-        .ui-checkbox {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            width: var(--checkbox-diameter);
-            height: var(--checkbox-diameter);
-            border-radius: var(--checkbox-border-radius);
-            background: var(--secondary-color);
-            border: var(--checkbox-border-width) var(--checkbox-border-style) var(--checkbox-border-color);
-            -webkit-transition: all 0.3s;
-            -o-transition: all 0.3s;
-            transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
-        }
+      .ui-checkbox::before {
+        top: 40%;
+        left: 50%;
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 7px;
+        border-right: 2px solid var(--secondary-color);
+        border-bottom: 2px solid var(--secondary-color);
+        -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+        -ms-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+        transform: translate(-50%, -50%) rotate(45deg) scale(0);
+        opacity: 0;
+        -webkit-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),
+          opacity 0.1s;
+        -o-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),
+          opacity 0.1s;
+        transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6), opacity 0.1s;
+      }
 
-        .ui-checkbox::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            -webkit-box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
-            box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
-            border-radius: inherit;
-            opacity: 0;
-            -webkit-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
-            -o-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
-            transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
-        }
+      /* actions */
 
-        .ui-checkbox::before {
-            top: 40%;
-            left: 50%;
-            content: "";
-            position: absolute;
-            width: 4px;
-            height: 7px;
-            border-right: 2px solid var(--secondary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(0);
-            -ms-transform: translate(-50%, -50%) rotate(45deg) scale(0);
-            transform: translate(-50%, -50%) rotate(45deg) scale(0);
-            opacity: 0;
-            -webkit-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
-            -o-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
-            transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
-        }
+      .ui-checkbox:hover {
+        border-color: var(--primary-color);
+      }
 
-        /* actions */
+      .ui-checkbox:checked {
+        background: var(--primary-color);
+        border-color: transparent;
+      }
 
-        .ui-checkbox:hover {
-            border-color: var(--primary-color);
-        }
+      .ui-checkbox:checked::before {
+        opacity: 1;
+        -webkit-transform: translate(-50%, -50%) rotate(45deg)
+          scale(var(--checkmark-size));
+        -ms-transform: translate(-50%, -50%) rotate(45deg)
+          scale(var(--checkmark-size));
+        transform: translate(-50%, -50%) rotate(45deg)
+          scale(var(--checkmark-size));
+        -webkit-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+        -o-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+        transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+      }
 
-        .ui-checkbox:checked {
-            background: var(--primary-color);
-            border-color: transparent;
-        }
+      .ui-checkbox:active:not(:checked)::after {
+        -webkit-transition: none;
+        -o-transition: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        transition: none;
+        opacity: 1;
+      }
+      /* popup */
 
-        .ui-checkbox:checked::before {
-            opacity: 1;
-            -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
-            -ms-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
-            transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
-            -webkit-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
-            -o-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
-            transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
-        }
+      /* .modal-dialog modal-dialog-centered .modal-content custom-modal p-3 .modal-body text-center */
+      .cardpopup {
+        --gray: rgba(229, 231, 235, 1);
+        width: 800px;
+        height: 20rem;
+        display: flex;
+        grid-gap: 1.25rem;
+        gap: 1.25rem;
+        border-radius: 1rem;
+        background: linear-gradient(258deg, #ce4b1d -6.59%, #fffaf9 84.63%);
+        padding: 1.5rem;
+      }
 
-        .ui-checkbox:active:not(:checked)::after {
-            -webkit-transition: none;
-            -o-transition: none;
-            -webkit-box-shadow: none;
-            box-shadow: none;
-            transition: none;
-            opacity: 1;
-        }
-        /* popup */
+      .card-1 {
+        width: 46%;
+        border-radius: 0.75rem;
+        border-style: dashed;
+        border-color: #ad0000;
+        background-color: var(--white);
+        /* animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) alternate-reverse infinite; */
+      }
 
-        /* .modal-dialog modal-dialog-centered .modal-content custom-modal p-3 .modal-body text-center */
-        .cardpopup{
-            --gray: rgba(229, 231, 235, 1);
-            width: 800px;
-            height: 20rem;
-            display: flex;
-            grid-gap: 1.25rem;
-            gap: 1.25rem;
-            border-radius: 1rem;
-            background: linear-gradient(258deg, #CE4B1D -6.59%, #FFFAF9 84.63%);
-            padding: 1.5rem;
-        }
+      .rightpopup {
+        display: flex;
+        flex: 1 1 0%;
+        flex-direction: column;
+        grid-gap: 1.25rem;
+        gap: 1.25rem;
+      }
 
-        .card-1 {
-            width: 46%;
-            border-radius: 0.75rem;
-            border-style: dashed;
-            border-color: #AD0000;
-            background-color: var(--white);
-            /* animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) alternate-reverse infinite; */
-        }
+      .card-3 {
+        height: 0.2rem;
+        width: 100%;
+        border-radius: 1rem;
+        background-color: var(--gray);
+        /* animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) alternate-reverse infinite; */
+      }
 
-        .rightpopup {
-            display: flex;
-            flex: 1 1 0%;
-            flex-direction: column;
-            grid-gap: 1.25rem;
-            gap: 1.25rem;
-        }
+      .bottompopup {
+        margin-top: auto;
+        display: contents;
+        grid-gap: 0.75rem;
+        gap: 0.75rem;
+        text-align: end;
+      }
 
-        .card-3 {
-            height: 0.2rem;
-            width: 100%;
-            border-radius: 1rem;
-            background-color: var(--gray);
-            /* animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) alternate-reverse infinite; */
-        }
+      .card-4 {
+        height: 2rem;
+        width: 33%;
+        border-radius: 9999px;
+        background-color: var(--gray);
+        /* animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) alternate-reverse infinite; */
+      }
 
-        .bottompopup {
-            margin-top: auto;
-            display: contents;
-            grid-gap: 0.75rem;
-            gap: 0.75rem;
-            text-align:end ;
-        }
+      .containerpopup {
+        padding-top: 5px;
+      }
+      .group8 {
+        position: relative;
+      }
+      .container-8 {
+        padding-top: 40px;
+      }
 
-        .card-4 {
-            height: 2rem;
-            width: 33%;
-            border-radius: 9999px;
-            background-color: var(--gray);
-            /* animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) alternate-reverse infinite; */
+      .main-input8 {
+        font-size: 16px;
+        padding: 8px 8px 12px 5px;
+        display: block;
+        width: 350px;
+        border: none;
+        border-bottom: 1px solid #000000;
+        background: transparent;
+        color: #000000;
+      }
 
+      .main-input8:focus {
+        outline: none;
+        border-bottom-color: rgb(255, 255, 255);
+      }
+      .lebal-email8 {
+        color: #000000;
+        font-size: 14px;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 5px;
+        top: 10px;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+      }
+      .main-input8:focus ~ .lebal-email8,
+      .main-input8:valid ~ .lebal-email8 {
+        top: -13px;
+        font-size: 15px;
+        color: rgb(93, 20, 20);
+      }
+      .highlight-span8 {
+        position: absolute;
+        height: 60%;
+        width: 0px;
+        top: 25%;
+        left: 0;
+        pointer-events: none;
+        opacity: 0.5;
+      }
+      .main-input8:focus ~ .highlight-span8 {
+        -webkit-animation: input-focus 0.3s ease;
+        animation: input-focus 0.3s ease;
+      }
+      @keyframes input-focus {
+        from {
+          background: #000000;
         }
+        to {
+          width: 185px;
+        }
+      }
 
-        .containerpopup {
-            padding-top: 5px;
+      @keyframes pulse {
+        to {
+          opacity: 0.2;
         }
-        .group8 {
-            position: relative;
-        }
-        .container-8 {
-            padding-top: 40px;
-        }
-
-        .main-input8 {
-            font-size: 16px;
-            padding: 8px 8px 12px 5px;
-            display: block;
-            width: 350px;
-            border: none;
-            border-bottom: 1px solid #000000;
-            background: transparent;
-            color: #000000;
-        }
-
-        .main-input8:focus {
-            outline: none;
-            border-bottom-color: rgb(255, 255, 255);
-
-        }
-        .lebal-email8 {
-            color: #000000;
-            font-size: 14px;
-            font-weight: normal;
-            position: absolute;
-            pointer-events: none;
-            left: 5px;
-            top: 10px;
-            transition: 0.2s ease all;
-            -moz-transition: 0.2s ease all;
-            -webkit-transition: 0.2s ease all;
-        }
-        .main-input8:focus ~ .lebal-email8,
-        .main-input8:valid ~ .lebal-email8 {
-            top: -13px;
-            font-size: 15px;
-            color: rgb(93, 20, 20);
-        }
-        .highlight-span8 {
-            position: absolute;
-            height: 60%;
-            width: 0px;
-            top: 25%;
-            left: 0;
-            pointer-events: none;
-            opacity: 0.5;
-        }
-        .main-input8:focus ~ .highlight-span8 {
-            -webkit-animation: input-focus 0.3s ease;
-            animation: input-focus 0.3s ease;
-        }
-        @keyframes input-focus {
-            from {
-                background: #000000;
-            }
-            to {
-                width: 185px;
-            }
-        }
-
-        @keyframes pulse {
-            to {
-                opacity: .2;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
-<!-- Wrapper -->
-<div id="wrapper" >
-<!-- Sidebar -->
-<div id="sidebar-wrapper">
-<div class="text-center sidebar-header" onclick="location.href='index.html'" style="cursor: pointer;">
-    <div class="text-center sidebar-icon">
-        <img class="sidebar-icon-image" th:src="@{/images/logoukm.png}" alt=""/>
-    </div>
-</div>
-<ul class="sidebar-nav">
-<li class="sidebar-brand text-center" style="margin-bottom: 180px"></li>
-    <li>
-    <div class="sidebar-link active" onclick="location.href='upload-proposal.html'">
-    <div class="sidebar-link-text">Upload <br/>Proposal</div>
-</div>
-<div class="sidebar-link" onclick="location.href='daftar-pendaftar.html'">
-<div class="sidebar-link-text">Daftar <br/>Pendaftar</div>
-</div>
-<div class="sidebar-link" onclick="location.href='history.html'">
-    <div class="sidebar-link-text">History <br />Pendaftar</div>
-    </div>
-</li>
-<div class="sidebar-logout" onclick="location.href='dashboard.html'">
-<div class="sidebar-logout-icon">
-    Log out
-</div>
-<svg class="vector" width="24" height="37" viewBox="0 0 24 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M22.2857 0H1.71429C1.25963 0 0.823594 0.19491 0.502103 0.541852C0.180612 0.888795 0 1.35935 0 1.85V18.5L8.57143 11.1V16.65H18.8571V20.35H8.57143V25.9L0 18.5V35.15C0 35.6406 0.180612 36.1112 0.502103 36.4581C0.823594 36.8051 1.25963 37 1.71429 37H22.2857C22.7404 37 23.1764 36.8051 23.4979 36.4581C23.8194 36.1112 24 35.6406 24 35.15V1.85C24 1.35935 23.8194 0.888795 23.4979 0.541852C23.1764 0.19491 22.7404 0 22.2857 0Z"
-    fill="white" />
-    </svg>
-    </div>
-    </ul>
-    </div>
-        <!--Sidebar -->
+  <body>
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <div
+          class="text-center sidebar-header"
+          onclick="location.href='index.html'"
+          style="cursor: pointer"
+        >
+          <div class="text-center sidebar-icon">
+            <img
+              class="sidebar-icon-image"
+              th:src="@{/images/logoukm.png}"
+              alt=""
+            />
+          </div>
+        </div>
+        <ul class="sidebar-nav">
+          <li
+            class="sidebar-brand text-center"
+            style="margin-bottom: 180px"
+          ></li>
+          <li>
+            <div
+              class="sidebar-link active"
+              onclick="location.href='/buat-event'"
+            >
+              <div class="sidebar-link-text">Buat <br />Event</div>
+            </div>
+          </li>
+          <div class="sidebar-logout" onclick="location.href='dashboard.html'">
+            <div class="sidebar-logout-icon">Log out</div>
+            <svg
+              class="vector"
+              width="24"
+              height="37"
+              viewBox="0 0 24 37"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M22.2857 0H1.71429C1.25963 0 0.823594 0.19491 0.502103 0.541852C0.180612 0.888795 0 1.35935 0 1.85V18.5L8.57143 11.1V16.65H18.8571V20.35H8.57143V25.9L0 18.5V35.15C0 35.6406 0.180612 36.1112 0.502103 36.4581C0.823594 36.8051 1.25963 37 1.71429 37H22.2857C22.7404 37 23.1764 36.8051 23.4979 36.4581C23.8194 36.1112 24 35.6406 24 35.15V1.85C24 1.35935 23.8194 0.888795 23.4979 0.541852C23.1764 0.19491 22.7404 0 22.2857 0Z"
+                fill="white"
+              />
+            </svg>
+          </div>
+        </ul>
+      </div>
+      <!--Sidebar -->
 
-        <!-- Header -->
-<div class="header-tel-u" style="height: 250px;">
-<div class="row">
-        <div class="col-lg-6">
-        <svg width="514" height="250" viewBox="0 0 714 329" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="362.622" y="283.32" width="113.678" height="113.678"
-            transform="rotate(-169.15 362.622 283.32)" fill="url(#paint0_linear_1_18)" />
-            <rect x="259.696" y="131.583" width="113.678" height="113.678"
-            transform="rotate(-169.15 259.696 131.583)" fill="url(#paint1_linear_1_18)" />
-            <rect x="505.255" y="186.57" width="113.678" height="113.678"
-            transform="rotate(-169.15 505.255 186.57)" fill="url(#paint2_linear_1_18)" />
-            <rect x="402.328" y="34.8328" width="113.678" height="113.678"
-            transform="rotate(-169.15 402.328 34.8328)" fill="url(#paint3_linear_1_18)" />
-            <rect x="646.674" y="90.6423" width="113.678" height="113.678"
-            transform="rotate(-169.15 646.674 90.6423)" fill="url(#paint4_linear_1_18)" />
-        <defs>
-    <linearGradient id="paint0_linear_1_18" x1="345.856" y1="229.936" x2="519.69" y2="448.608"
-            gradientUnits="userSpaceOnUse">
-        <stop stop-color="#D86636" />
-        <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-    </linearGradient>
-    <linearGradient id="paint1_linear_1_18" x1="242.929" y1="78.1989" x2="416.764" y2="296.871" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#D86636" />
-        <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-    </linearGradient>
-    <linearGradient id="paint2_linear_1_18" x1="488.488" y1="133.185" x2="662.323" y2="351.857" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#D86636" />
-        <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-    </linearGradient>
-    <linearGradient id="paint3_linear_1_18" x1="385.562" y1="-18.5516" x2="559.397" y2="200.121" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#D86636" />
-        <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-    </linearGradient>
-    <linearGradient id="paint4_linear_1_18" x1="629.907" y1="37.258" x2="803.742" y2="255.93" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#D86636" />
-        <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-    </linearGradient>
-        </defs>
-        </svg>
-    </div>
-    <div class="col-lg-1"></div>
-    </div>
-    <div class="right-logo-outer"></div>
-    <img class="right-logo-image" th:src="@{images/logoukmkanan2.png}"/>
-    <div class="row">
-        <div class="col-lg-8"></div>
-        <div class="col-lg-4" style="z-index: 3; margin-left: 87%; cursor: pointer;"><a th:href="@{edit.html}">
-        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 65 65" fill="none">
-            <mask id="mask0_1_106" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="65" height="65">
-            <rect width="64.4139" height="64.4139" fill="white" />
-            </mask>
-        <g mask="url(#mask0_1_106)">
-        <path d="M6 59V49.3636H58V59H6ZM16.4 39.7273H20.04L40.32 20.9966L36.615 17.5636L16.4 36.3545V39.7273ZM11.2 44.5455V34.3068L40.32 7.38523C40.7967 6.94356 41.3492 6.60227 41.9775 6.36136C42.6058 6.12045 43.2667 6 43.96 6C44.6533 6 45.325 6.12045 45.975 6.36136C46.625 6.60227 47.21 6.96364 47.73 7.44545L51.305 10.8182C51.825 11.2598 52.2042 11.7818 52.4425 12.3841C52.6808 12.9864 52.8 13.6087 52.8 14.2511C52.8 14.8534 52.6808 15.4456 52.4425 16.0278C52.2042 16.61 51.825 17.142 51.305 17.6239L22.25 44.5455H11.2Z" fill="white" />
-        </g>
-        </svg></a>
-</div>
-    </div>
-    </div>
-        <!-- Header -->
-
-        <!--Data -->
-
-    <h4 class="text-center mt-5">MR. BOB YOUTH AMBASSADOR BATCH 2</h4>
-    <div id="page-content-wrapper" style="position: absolute;">
-    <div class="container-fluid">
+      <!-- Header -->
+      <div class="header-tel-u" style="height: 250px">
         <div class="row">
-        <div class="col-lg-10">
-        <div class="form-group">
-        <label for="deskripsi" class="custom-label">Deskripsi</label>
-        <br>
-    <textarea class="form-control custom-input" name="deskripsi" id="deskripsi" cols="20" rows="30" >MR. BOB YOUTH AMBASSADOR BATCH 2
+          <div class="col-lg-6">
+            <svg
+              width="514"
+              height="250"
+              viewBox="0 0 714 329"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="362.622"
+                y="283.32"
+                width="113.678"
+                height="113.678"
+                transform="rotate(-169.15 362.622 283.32)"
+                fill="url(#paint0_linear_1_18)"
+              />
+              <rect
+                x="259.696"
+                y="131.583"
+                width="113.678"
+                height="113.678"
+                transform="rotate(-169.15 259.696 131.583)"
+                fill="url(#paint1_linear_1_18)"
+              />
+              <rect
+                x="505.255"
+                y="186.57"
+                width="113.678"
+                height="113.678"
+                transform="rotate(-169.15 505.255 186.57)"
+                fill="url(#paint2_linear_1_18)"
+              />
+              <rect
+                x="402.328"
+                y="34.8328"
+                width="113.678"
+                height="113.678"
+                transform="rotate(-169.15 402.328 34.8328)"
+                fill="url(#paint3_linear_1_18)"
+              />
+              <rect
+                x="646.674"
+                y="90.6423"
+                width="113.678"
+                height="113.678"
+                transform="rotate(-169.15 646.674 90.6423)"
+                fill="url(#paint4_linear_1_18)"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear_1_18"
+                  x1="345.856"
+                  y1="229.936"
+                  x2="519.69"
+                  y2="448.608"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#D86636" />
+                  <stop offset="1" stop-color="#D86636" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient
+                  id="paint1_linear_1_18"
+                  x1="242.929"
+                  y1="78.1989"
+                  x2="416.764"
+                  y2="296.871"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#D86636" />
+                  <stop offset="1" stop-color="#D86636" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient
+                  id="paint2_linear_1_18"
+                  x1="488.488"
+                  y1="133.185"
+                  x2="662.323"
+                  y2="351.857"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#D86636" />
+                  <stop offset="1" stop-color="#D86636" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient
+                  id="paint3_linear_1_18"
+                  x1="385.562"
+                  y1="-18.5516"
+                  x2="559.397"
+                  y2="200.121"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#D86636" />
+                  <stop offset="1" stop-color="#D86636" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient
+                  id="paint4_linear_1_18"
+                  x1="629.907"
+                  y1="37.258"
+                  x2="803.742"
+                  y2="255.93"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#D86636" />
+                  <stop offset="1" stop-color="#D86636" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="col-lg-1"></div>
+        </div>
+        <img class="right-logo-image" th:src="@{'/logos/' + ${ukm.logo}}" />
+      </div>
+      <!-- Header -->
 
-Hello, young talents who have a high passion to be Mr Bob's Ambassador! For those of you who want to grow with us by improving your speaking, digital marketing, and self development skills, this program is for you!
-For those of you who:
-- SMA/SMK students and D3/S1/S2 active students (all majors & universities) from all over Indonesia
-- Have an interest in English
-- Have Instagram/TikTok social media (not private during selection)
-- Willing to join the program for 2 months (Full Online)
+      <!--Data -->
 
-You will get:
-- Speaking, Digital Marketing, Self Development Class + Learning materials worth 7 Million IDR
-- Voucher 100 IDR to join the program at Mr Bob
-- Additional income
-- Career Opportunities*
-- E-certificate & build portfolio
-- Join Mr Bob Community & build networking with Mr. Bob Youth Ambassador from all over Indonesia
-
-Duration: 2 months (Online)
-
-Open register: 1 - 15 July 2023
-
-Guidebook:
-What are you waiting for? Let's register yourself on https://bit.ly/JoinMYA2
-See you!
-
-#MrBobYouthAmbassador #MulaiDariSini #PeDeNgomongInggris #MrBobSuperSeru </textarea>
-    </div>
-    <div class="form-group pt-4">
-    <label for="upload" class="custom-label">Upload Foto</label>
-    <div class="card custom-input text-center p-3">
-        <div id="upload-section">
-        <svg width="950" height="79" viewBox="0 0 105 79" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M56.0816 78.8857V56.3469H71.0367L52.3428 33.8082L33.649 56.3469H48.6041V78.8857H29.9102V78.6979C29.2821 78.7355 28.6839 78.8857 28.0408 78.8857C20.6039 78.8857 13.4716 75.9175 8.21296 70.6339C2.95429 65.3504 0 58.1843 0 50.7123C0 36.2574 10.8798 24.4771 24.8404 22.8618C26.0644 16.433 29.4798 10.6336 34.4992 6.46111C39.5186 2.28866 45.8282 0.00396693 52.3428 0C58.8583 0.00366378 65.169 2.28808 70.1896 6.46044C75.2103 10.6328 78.6272 16.4324 79.8527 22.8618C93.8133 24.4771 104.678 36.2574 104.678 50.7123C104.678 58.1843 101.724 65.3504 96.4652 70.6339C91.2066 75.9175 84.0743 78.8857 76.6374 78.8857C76.0093 78.8857 75.4036 78.7355 74.768 78.6979V78.8857H56.0816Z" fill="url(#paint0_linear_1_505)" />
-    <defs>
-    <linearGradient id="paint0_linear_1_505" x1="52.3391" y1="0" x2="52.3391" y2="78.8857" gradientUnits="userSpaceOnUse">
-            <stop offset="0.0572917" stop-color="#A80000" />
-            <stop offset="0.791667" stop-color="#DB5F1E" />
-    </linearGradient>
-    </defs>
-    </svg>
-    <br> <br>
-    <span style="font-weight: 200;">Drag and Drop File OR </span>
-    <br> <br>
-    <button type="button" class="btn btn-secondary btn-sm btn-custom" onclick="triggerFileInput()">Browse</button>
-</div>
-    <br>
-<div class="text-center">
-    <!--  Masukan file  -->
-    <input type="file" id="fileInput" style="display: none;" onchange="handleFileSelect()">
-        <p id="selectedFileDisplay"></p>
-    </div>
-    </div>
-<div class="text-center mb-5 mt-5">
-            <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary btn-sm btn-custom">
-        Save
-    </button>
-    <br>
-</div>
-</div>
-</div>
-    </div>
-    </div>
-        <footer class="footer mt-5" style="margin-left : -20px; margin-bottom : -20px;">
-            <div class="footer-left">
-                <h1><strong>Kontak</strong></h1>
-                <div class="img_">
-                <img th:src="@{images/footer.png}" width="400px" alt="">
-                </div><br>
-                <div>
-                    <i class="fa fa-map-marker"></i>
-                    <p><span>Indonesia</span> Bandung,Jawa Barat</p>
+      <h4 class="text-center mt-5" th:text="${ukm.name}"></h4>
+      <div id="page-content-wrapper" style="position: absolute">
+        <form
+          th:action="@{/buat-event/save}"
+          method="post"
+          th:object="${event}"
+          enctype="multipart/form-data"
+        >
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-10">
+                <div class="form-group my-4">
+                  <label for="name" class="custom-label">Nama</label>
+                  <p
+                      th:errors="*{name}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('name')}"
+                    ></p>
+                  <br />
+                  <input
+                    class="form-control custom-input"
+                    name="name"
+                    id="name"
+                    type="text"
+                    th:field="*{name}"
+                  ></input>
                 </div>
-                <div>
-                    <i class="fa fa-phone"></i>
-                    <p>(022) 7566456</p>
+                <div class="form-group">
+                  <label for="description" class="custom-label">Deskripsi</label>
+                  <p
+                      th:errors="*{description}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('description')}"
+                    ></p>
+                    <br />
+                  <textarea
+                    class="form-control custom-input"
+                    name="description"
+                    id="description"
+                    th:field="*{description}"
+                    cols="20"
+                    rows="10  "
+                  ></textarea>
                 </div>
-                <div>
-                    <i class="fa fa-envelope"></i>
-                    <p><a href="#">uniT@telkomuniversity.ac.id</a></p>
+                <div class="form-group my-4">
+                  <label for="price" class="custom-label">Harga</label>
+                  <p
+                      th:errors="*{price}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('price')}"
+                    ></p>
+                  <br />
+                  <input
+                    class="form-control custom-input"
+                    name="price"
+                    id="price"
+                    type="number"
+                    th:field="*{price}"
+                  ></input>
                 </div>
+                <div class="form-group my-4">
+                  <label for="start_date" class="custom-label">Tanggal Mulai</label>
+                  <p
+                      th:errors="*{start_date}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('start_date')}"
+                    ></p>
+                  <br />
+                  <input
+                    class="form-control custom-input"
+                    name="start_date"
+                    id="start_date"
+                    type="date"
+                    th:field="*{start_date}"
+                  ></input>
+                </div>
+                <div class="form-group my-4">
+                  <label for="end_date" class="custom-label">Tanggal Selesai</label>
+                  <p
+                      th:errors="*{end_date}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('end_date')}"
+                    ></p>
+                  <br />
+                  <input
+                    class="form-control custom-input"
+                    name="end_date"
+                    id="end_date"
+                    type="date"
+                    th:field="*{end_date}"
+                  ></input>
+                </div>
+                <div class="form-group pt-4">
+                  <label for="upload" class="custom-label">Upload Foto</label>
+                  <div class="card custom-input text-center p-3">
+                    <div id="upload-section">
+                      <svg
+                        width="950"
+                        height="79"
+                        viewBox="0 0 105 79"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M56.0816 78.8857V56.3469H71.0367L52.3428 33.8082L33.649 56.3469H48.6041V78.8857H29.9102V78.6979C29.2821 78.7355 28.6839 78.8857 28.0408 78.8857C20.6039 78.8857 13.4716 75.9175 8.21296 70.6339C2.95429 65.3504 0 58.1843 0 50.7123C0 36.2574 10.8798 24.4771 24.8404 22.8618C26.0644 16.433 29.4798 10.6336 34.4992 6.46111C39.5186 2.28866 45.8282 0.00396693 52.3428 0C58.8583 0.00366378 65.169 2.28808 70.1896 6.46044C75.2103 10.6328 78.6272 16.4324 79.8527 22.8618C93.8133 24.4771 104.678 36.2574 104.678 50.7123C104.678 58.1843 101.724 65.3504 96.4652 70.6339C91.2066 75.9175 84.0743 78.8857 76.6374 78.8857C76.0093 78.8857 75.4036 78.7355 74.768 78.6979V78.8857H56.0816Z"
+                          fill="url(#paint0_linear_1_505)"
+                        />
+                        <defs>
+                          <linearGradient
+                            id="paint0_linear_1_505"
+                            x1="52.3391"
+                            y1="0"
+                            x2="52.3391"
+                            y2="78.8857"
+                            gradientUnits="userSpaceOnUse"
+                          >
+                            <stop offset="0.0572917" stop-color="#A80000" />
+                            <stop offset="0.791667" stop-color="#DB5F1E" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                      <br />
+                      <br />
+                      <span style="font-weight: 200"
+                        >Drag and Drop File OR
+                      </span>
+                      <br />
+                      <br />
+                      <button
+                        type="button"
+                        class="btn btn-secondary btn-sm btn-custom"
+                        onclick="triggerFileInput()"
+                      >
+                        Browse
+                      </button>
+                    </div>
+                    <br />
+                    <div class="text-center">
+                      <!--  Masukan file  -->
+                      <input
+                        type="file"
+                        id="fileInput"
+                        name="poster"
+                        accept="image/*"
+                        style="display: none"
+                        onchange="handleFileSelect()"
+                      />
+                      <p id="selectedFileDisplay"></p>
+                    </div>
+                  </div>
+                  <div class="text-center mb-5 mt-5">
+                    <button
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      class="btn btn-secondary btn-sm btn-custom"
+                    >
+                      Save
+                    </button>
+                    <br />
+                  </div>
+                </div>
+              </div>
             </div>
-        
-        
-            <div class="footer-right">
-                <div class="footer-media">
-                    <a href="#"><i class="fa fa-youtube"></i></a>
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                </div>
-            
-                <p class="footer-about">
-                    <span>About</span>
-                    Di Channel ini kita akan berbagi barbagai Tutorial design, Pemograman dan lain-lain. Silahkan subscribe untuk kemajuan channel ini, jangan lupa, like dan comments. agar channel ini semakin berkembang
-                </p>
+          </div>
+        </form>
+        <footer
+          class="footer mt-5"
+          style="margin-left: -20px; margin-bottom: -20px"
+        >
+          <div class="footer-left">
+            <h1><strong>Kontak</strong></h1>
+            <div class="img_">
+              <img th:src="@{images/footer.png}" width="400px" alt="" />
             </div>
+            <br />
+            <div>
+              <i class="fa fa-map-marker"></i>
+              <p><span>Indonesia</span> Bandung,Jawa Barat</p>
+            </div>
+            <div>
+              <i class="fa fa-phone"></i>
+              <p>(022) 7566456</p>
+            </div>
+            <div>
+              <i class="fa fa-envelope"></i>
+              <p><a href="#">uniT@telkomuniversity.ac.id</a></p>
+            </div>
+          </div>
+
+          <div class="footer-right">
+            <div class="footer-media">
+              <a href="#"><i class="fa fa-youtube"></i></a>
+              <a href="#"><i class="fa fa-facebook"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+
+            <p class="footer-about">
+              <span>About</span>
+              Di Channel ini kita akan berbagi barbagai Tutorial design,
+              Pemograman dan lain-lain. Silahkan subscribe untuk kemajuan
+              channel ini, jangan lupa, like dan comments. agar channel ini
+              semakin berkembang
+            </p>
+          </div>
         </footer>
+      </div>
+      <!-- Data Sls -->
     </div>
-        <!-- Data Sls -->
-        
-</div>
     <!-- Wrapper -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content custom-modal p-3">
-    <div class="modal-body text-center">
-        <h3>Proposal berhasil diajukan</h3>
-        <br>
-<svg width="100" height="100" viewBox="0 0 151 151" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="75.5" cy="75.5" r="75.5" fill="white" />
-    <mask id="mask0_1_455" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="14" y="17" width="121" height="121">
-        <rect x="14" y="17" width="121" height="121" fill="#D9D9D9" />
-    </mask>
-            <g mask="url(#mask0_1_455)">
-    <path d="M62.1484 107.75L33.4109 79.0123L40.5953 71.8279L62.1484 93.3811L108.406 47.1238L115.59 54.3082L62.1484 107.75Z" fill="black"/>
-            </g>
-    </svg>
-    <br>
-    <br>
-    <a th:href="@{index.html}" class="btn btn-secondary btn-sm btn-custom-secondary">OK </a>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal p-3">
+          <div class="modal-body text-center">
+            <h3>Proposal berhasil diajukan</h3>
+            <br />
+            <svg
+              width="100"
+              height="100"
+              viewBox="0 0 151 151"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="75.5" cy="75.5" r="75.5" fill="white" />
+              <mask
+                id="mask0_1_455"
+                style="mask-type: alpha"
+                maskUnits="userSpaceOnUse"
+                x="14"
+                y="17"
+                width="121"
+                height="121"
+              >
+                <rect x="14" y="17" width="121" height="121" fill="#D9D9D9" />
+              </mask>
+              <g mask="url(#mask0_1_455)">
+                <path
+                  d="M62.1484 107.75L33.4109 79.0123L40.5953 71.8279L62.1484 93.3811L108.406 47.1238L115.59 54.3082L62.1484 107.75Z"
+                  fill="black"
+                />
+              </g>
+            </svg>
+            <br />
+            <br />
+            <a
+              th:href="@{index.html}"
+              class="btn btn-secondary btn-sm btn-custom-secondary"
+              >OK
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
-</div>
-</div>
 
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function triggerFileInput() {
+        // Trigger the click event of the file input
+        document.getElementById("fileInput").click();
+      }
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-<script type="javascript"></script>
-<script th:src="@{js/index.js}"></script>
-</body>
+      function handleFileSelect() {
+        // Handle the file selection here
+        var selectedFile = document.getElementById("fileInput").files[0];
+        console.log("Selected file:", selectedFile);
 
+        var selectedFile = document.getElementById("fileInput").files[0];
+        console.log("Selected file:", selectedFile);
+
+        // Display the selected file name
+        var displayElement = document.getElementById("selectedFileDisplay");
+        displayElement.textContent = selectedFile
+          ? "Selected File: " + selectedFile.name
+          : "No file selected";
+
+        const uploadSection = document.getElementById("upload-section");
+        uploadSection.style = "display: none;";
+      }
+    </script>
+  </body>
 </html>

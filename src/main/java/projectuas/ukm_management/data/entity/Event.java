@@ -39,8 +39,11 @@ public class Event {
     @Column(nullable = false)
     private boolean is_paid = false;
 
-    @Column()
+    @Column(nullable = true)
     private int price;
+
+    @Column(nullable = false)
+    private String poster;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date start_date;
