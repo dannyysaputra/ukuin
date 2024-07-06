@@ -43,14 +43,10 @@ public class AuthController {
         return "index";
     }
 
-    @GetMapping("/detail_ukm")
-    public String detailukm(){
-        return "detail_ukm";
-    }
-    @GetMapping("/detail_ukm/{id}")
+    @GetMapping("/detail-ukm/{id}")
     public String detailukm(@PathVariable("id") Long id , Model model) {
         User user = userService.getUserById(id);
-        model.addAttribute("User", user);
+        model.addAttribute("user", user);
         return "detail_ukm";
     }
 
