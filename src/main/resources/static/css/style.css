@@ -192,7 +192,7 @@ body {
 h1.text-title {
   position: relative; /* posisis bgus*/
   z-index: 2; /* svg pengaturan*/
-  font-size: 70px;
+  font-size: 42px;
   font-weight: 700;
   color: #fff;
   margin-left: 60px;
@@ -291,11 +291,12 @@ h1.text-title {
 
 
 .right-logo-image {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   left: 90.2%;
   top: 48px;
   position: absolute;
+  border-radius: 100%;
   z-index: 9999;
 }
 
