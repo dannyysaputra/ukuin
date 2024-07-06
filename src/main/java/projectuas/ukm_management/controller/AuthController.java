@@ -2,6 +2,7 @@ package projectuas.ukm_management.controller;
 
 import jakarta.validation.Valid;
 import projectuas.ukm_management.data.entity.User;
+import projectuas.ukm_management.data.repository.UserRepository;
 import projectuas.ukm_management.dto.UserDto;
 import projectuas.ukm_management.service.UserService;
 
@@ -40,6 +41,13 @@ public class AuthController {
     @GetMapping("/")
     public String home() {
         return "index";
+    }
+
+    @GetMapping("/detail-ukm/{id}")
+    public String detailukm(@PathVariable("id") Long id , Model model) {
+        User user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "detail_ukm";
     }
 
     // handler method to handle user registration form request
