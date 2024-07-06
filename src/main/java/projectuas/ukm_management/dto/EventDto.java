@@ -1,6 +1,6 @@
 package projectuas.ukm_management.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +28,7 @@ public class EventDto
 
     private MultipartFile poster;
 
-    private Date start_date;
+    private LocalDate start_date;
 
-    private Date end_date;
+    private LocalDate end_date;
 }

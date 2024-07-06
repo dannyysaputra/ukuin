@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import projectuas.ukm_management.data.entity.Event;
+import projectuas.ukm_management.data.entity.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -45,7 +47,7 @@ public class EventController {
         return "ukm/create_event";
     }
 
-    @PostMapping("/buat-event/save")
+    @PostMapping("/create-event")
     public String create(@Valid @ModelAttribute EventDto eventDto,
             BindingResult result,
             Authentication authentication) {
@@ -54,6 +56,9 @@ public class EventController {
         }
 
         if (result.hasErrors()) {
+            result.getFieldErrors().forEach(error -> {
+                System.out.println("Field: " + error.getField() + " - " + error.getDefaultMessage());
+            });
             return "ukm/create_event";
         }
 
@@ -76,17 +81,23 @@ public class EventController {
             System.out.println(e.getMessage());
         }
 
-        Boolean isPaid = false;
+        Boolean isPaid = eventDto.getPrice() != 0;
 
-        if (eventDto.getPrice() != 0) {
-            isPaid = true;
-        }
+        String username = authentication.getName();
+        User user = userService.findUserByUsername(username);
 
         Event event = new Event();
         event.setName(eventDto.getName());
         event.setDescription(eventDto.getDescription());
         event.setPrice(eventDto.getPrice());
         event.set_paid(isPaid);
+        event.setPoster(fileName);
+        event.setStart_date(eventDto.getStart_date());
+        event.setEnd_date(eventDto.getEnd_date());
+        event.setUser(user);
+        
+        eventService.saveEvent(event);
+        return "redirect:/home";
     }
 
 }
