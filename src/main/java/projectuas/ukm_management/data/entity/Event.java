@@ -1,5 +1,6 @@
 package projectuas.ukm_management.data.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -39,14 +40,15 @@ public class Event {
     @Column(nullable = false)
     private boolean is_paid = false;
 
-    @Column()
+    @Column(nullable = true)
     private int price;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date start_date;
+    @Column(nullable = false)
+    private String poster;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date end_date;
+    private LocalDate start_date;
+
+    private LocalDate end_date;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
