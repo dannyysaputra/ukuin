@@ -104,7 +104,7 @@
             <div class="container-fluid align-items-center">
                 <div class="row">
                     <div class="col-3" style="margin-left: 40px;" th:each="user : ${users}">
-                        <img th:src="@{'/logos/' + ${user.logo}}" style="width: 100%;" alt="...">
+                        <a href="@{/user/{id}(id = ${user.id})}"><img th:src="@{'/logos/' + ${user.logo}}" style="width: 100%;" alt="..."></a>
                     </div>
                 </div>
             </div>

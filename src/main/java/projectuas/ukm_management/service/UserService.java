@@ -3,6 +3,7 @@ package projectuas.ukm_management.service;
 import java.util.List;
 
 import projectuas.ukm_management.data.entity.User;
+import projectuas.ukm_management.data.repository.UserRepository;
 import projectuas.ukm_management.dto.UserDto;
 
 public interface UserService {
