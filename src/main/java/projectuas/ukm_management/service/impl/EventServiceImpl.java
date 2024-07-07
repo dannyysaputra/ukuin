@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import projectuas.ukm_management.data.entity.Event;
+import projectuas.ukm_management.data.entity.User;
 import projectuas.ukm_management.data.repository.EventRepository;
 import projectuas.ukm_management.service.EventService;
 
@@ -20,6 +21,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public void saveEvent(Event event) {
         eventRepository.save(event);
+    }
+
+    @Override
+    public void deleteEventById(Long id) {
+        eventRepository.deleteById(id);
     }
 
     @Override
@@ -39,6 +45,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event getEventById(Long id) {
         return eventRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Event> getEventByUkm(User user) {
+        return eventRepository.findByUser(user);
     }
 
     @Override

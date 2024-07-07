@@ -6,16 +6,16 @@
     <title>Unit</title>
     <link rel="icon" th:href="@{images/logo.png}" type="image/png" />
     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <!-- <link rel="stylesheet" th:href="@{css/style.css}" /> -->
+    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}" />
     <style>
       body {
         overflow-x: hidden;
@@ -24,7 +24,7 @@
 
       /* css beneran */
       #wrapper {
-        margin-right: -110px;
+        padding-left: 0;
         -webkit-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
         -o-transition: all 0.5s ease;
@@ -308,12 +308,11 @@
       }
 
       .right-logo-image {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
         left: 90.2%;
         top: 48px;
         position: absolute;
-        border-radius: 100%;
         z-index: 9999;
       }
 
@@ -1003,6 +1002,7 @@
       }
     </style>
   </head>
+
   <body>
     <!-- Wrapper -->
     <div id="wrapper">
@@ -1014,7 +1014,11 @@
           style="cursor: pointer"
         >
           <div class="text-center sidebar-icon">
-            <img class="sidebar-icon-image" th:src="@{images/logo.png}" />
+            <img
+              class="sidebar-icon-image"
+              th:src="@{/images/logoukm.png}"
+              alt=""
+            />
           </div>
         </div>
         <ul class="sidebar-nav">
@@ -1024,16 +1028,10 @@
           ></li>
           <li>
             <div
-              class="sidebar-link"
+              class="sidebar-link active"
               onclick="location.href='/buat-event'"
             >
               <div class="sidebar-link-text">Buat <br />Event</div>
-            </div>
-            <div
-              class="sidebar-link"
-              onclick="location.href='/event-saya'"
-            >
-              <div class="sidebar-link-text">Event <br />Saya</div>
             </div>
           </li>
           <div class="sidebar-logout" onclick="location.href='dashboard.html'">
@@ -1054,10 +1052,10 @@
           </div>
         </ul>
       </div>
-      <!-- Sidebar -->
+      <!--Sidebar -->
 
       <!-- Header -->
-      <div class="header-tel-u">
+      <div class="header-tel-u" style="height: 250px">
         <div class="row">
           <div class="col-lg-6">
             <svg
@@ -1168,388 +1166,182 @@
           </div>
           <div class="col-lg-1"></div>
         </div>
-        <!-- <div class="right-logo-outer"></div> -->
-        <img class="right-logo-image" th:src="@{'/logos/' + ${ukm.logo}}" />
-        <div class="svg-container">
-          <svg
-            style="z-index: 1"
-            width="473"
-            height="400"
-            viewBox="0 0 473 486"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              x="4.87122"
-              y="62.1997"
-              width="113.678"
-              height="113.678"
-              transform="rotate(-48.4743 4.87122 62.1997)"
-              fill="url(#paint0_linear_1_8)"
-            />
-            <rect
-              x="187.886"
-              y="51.0886"
-              width="113.678"
-              height="113.678"
-              transform="rotate(-48.4743 187.886 51.0886)"
-              fill="url(#paint1_linear_1_8)"
-            />
-            <rect
-              x="370.901"
-              y="39.9775"
-              width="113.678"
-              height="113.678"
-              transform="rotate(-48.4743 370.901 39.9775)"
-              fill="url(#paint2_linear_1_8)"
-            />
-            <rect
-              x="15.3157"
-              y="234.234"
-              width="113.678"
-              height="113.678"
-              transform="rotate(-48.4743 15.3157 234.234)"
-              fill="url(#paint3_linear_1_8)"
-            />
-            <rect
-              x="198.331"
-              y="223.123"
-              width="113.678"
-              height="113.678"
-              transform="rotate(-48.4743 198.331 223.123)"
-              fill="url(#paint4_linear_1_8)"
-            />
-            <rect
-              x="381.346"
-              y="212.011"
-              width="113.678"
-              height="113.678"
-              transform="rotate(-48.4743 381.346 212.011)"
-              fill="url(#paint5_linear_1_8)"
-            />
-            <rect
-              x="25.6713"
-              y="404.804"
-              width="113.678"
-              height="113.678"
-              transform="rotate(-48.4743 25.6713 404.804)"
-              fill="url(#paint6_linear_1_8)"
-            />
-            <rect
-              x="208.686"
-              y="393.692"
-              width="113.678"
-              height="113.678"
-              transform="rotate(-48.4743 208.686 393.692)"
-              fill="url(#paint7_linear_1_8)"
-            />
-            <rect
-              x="391.701"
-              y="382.581"
-              width="113.678"
-              height="113.678"
-              transform="rotate(-48.4743 391.701 382.581)"
-              fill="url(#paint8_linear_1_8)"
-            />
-            <defs>
-              <linearGradient
-                id="paint0_linear_1_8"
-                x1="-11.8953"
-                y1="8.81534"
-                x2="161.94"
-                y2="227.488"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color="#D86636" />
-                <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint1_linear_1_8"
-                x1="171.12"
-                y1="-2.29574"
-                x2="344.954"
-                y2="216.377"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color="#D86636" />
-                <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint2_linear_1_8"
-                x1="354.135"
-                y1="-13.4068"
-                x2="527.969"
-                y2="205.265"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color="#D86636" />
-                <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint3_linear_1_8"
-                x1="-1.45084"
-                y1="180.849"
-                x2="172.384"
-                y2="399.522"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color="#D86636" />
-                <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint4_linear_1_8"
-                x1="181.564"
-                y1="169.738"
-                x2="355.399"
-                y2="388.41"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color="#D86636" />
-                <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint5_linear_1_8"
-                x1="364.579"
-                y1="158.627"
-                x2="538.414"
-                y2="377.299"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color="#D86636" />
-                <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint6_linear_1_8"
-                x1="8.90475"
-                y1="351.419"
-                x2="182.74"
-                y2="570.092"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color="#D86636" />
-                <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint7_linear_1_8"
-                x1="191.92"
-                y1="340.308"
-                x2="365.755"
-                y2="558.98"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color="#D86636" />
-                <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint8_linear_1_8"
-                x1="374.935"
-                y1="329.197"
-                x2="548.77"
-                y2="547.869"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color="#D86636" />
-                <stop offset="1" stop-color="#D86636" stop-opacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <h1 class="text-title" th:text="${ukm.name}"></h1>
-        <div class="row">
-          <div class="col-lg-8"></div>
-          <div class="col-lg-4" style="z-index: 3; margin-left: 87%"></div>
-        </div>
+        <img class="right-logo-image" th:src="@{'/logos/' + ${event.user.logo}}" />
       </div>
       <!-- Header -->
 
-      <!-- data2 -->
+      <!--Data -->
 
-      <div>
-        <div class="text-center mt-4">
-          <center>
-            <img th:src="@{images/mid_logo.png}" width="12%" alt="" />
-          </center>
-        </div>
+      <h4 class="text-center mt-5" th:text="${event.user.name}"></h4>
+      <div id="page-content-wrapper" style="position: absolute">
         <form
-          th:action="@{/edit-ukm/update/{id}(id = ${ukm.id}) }"
+          th:action="@{/edit-event/update/{id}(id = ${event.id}) }"
           method="post"
-          th:object="${ukm}"
+          th:object="${event}"
           enctype="multipart/form-data"
         >
-          <div class="form-group px-5">
-            <label for="name" class="custom-label">Nama UKM</label>
-            <br />
-            <textarea
-              class="form-control custom-input"
-              id="name"
-              name="name"
-              th:field="*{name}"
-              cols="30"
-            ></textarea
-            ><br />
-            <p
-              th:errors="*{name}"
-              class="text-danger"
-              th:if="${#fields.hasErrors('name')}"
-            ></p>
-          </div>
-
-          <div class="form-group px-5">
-            <label for="email" class="custom-label">Email</label>
-            <br />
-            <textarea
-              class="form-control custom-input"
-              id="email"
-              name="email"
-              th:field="*{email}"
-              cols="30"
-            ></textarea
-            ><br />
-            <p
-              th:errors="*{email}"
-              class="text-danger"
-              th:if="${#fields.hasErrors('email')}"
-            ></p>
-          </div>
-
-          <div class="form-group px-5">
-            <label for="description" class="custom-label">Deskripsi</label>
-            <br />
-            <textarea
-              class="form-control custom-input"
-              name="description"
-              id="description"
-              th:field="*{description}"
-              cols="30"
-              rows="10"
-            >
-            </textarea>
-            <p
-              th:errors="*{description}"
-              class="text-danger"
-              th:if="${#fields.hasErrors('description')}"
-            ></p>
-          </div>
-
-          <div class="form-group px-5">
-            <label for="vision" class="custom-label">Visi</label>
-            <br />
-            <textarea
-              class="form-control custom-input"
-              name="vision"
-              id="vision"
-              th:field="*{vision}"
-              cols="30"
-              rows="10"
-            >
-            </textarea>
-            <p
-              th:errors="*{vision}"
-              class="text-danger"
-              th:if="${#fields.hasErrors('vision')}"
-            ></p>
-          </div>
-
-          <div class="form-group px-5">
-            <label for="mission" class="custom-label">Misi</label>
-            <br />
-            <textarea
-              class="form-control custom-input"
-              name="mission"
-              id="mission"
-              th:field="*{mission}"
-              cols="30"
-              rows="10"
-            >
-            </textarea>
-            <p
-              th:errors="*{mission}"
-              class="text-danger"
-              th:if="${#fields.hasErrors('mission')}"
-            ></p>
-          </div>
-
-          <div class="form-group p-5 pt-0">
-            <label for="upload" class="custom-label">Upload Foto</label>
-            <div class="card custom-input text-center p-3">
-              <div id="upload-section">
-                <svg
-                  width="1120"
-                  height="79"
-                  viewBox="0 0 105 79"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M56.0816 78.8857V56.3469H71.0367L52.3428 33.8082L33.649 56.3469H48.6041V78.8857H29.9102V78.6979C29.2821 78.7355 28.6839 78.8857 28.0408 78.8857C20.6039 78.8857 13.4716 75.9175 8.21296 70.6339C2.95429 65.3504 0 58.1843 0 50.7123C0 36.2574 10.8798 24.4771 24.8404 22.8618C26.0644 16.433 29.4798 10.6336 34.4992 6.46111C39.5186 2.28866 45.8282 0.00396693 52.3428 0C58.8583 0.00366378 65.169 2.28808 70.1896 6.46044C75.2103 10.6328 78.6272 16.4324 79.8527 22.8618C93.8133 24.4771 104.678 36.2574 104.678 50.7123C104.678 58.1843 101.724 65.3504 96.4652 70.6339C91.2066 75.9175 84.0743 78.8857 76.6374 78.8857C76.0093 78.8857 75.4036 78.7355 74.768 78.6979V78.8857H56.0816Z"
-                    fill="url(#paint0_linear_1_505)"
-                  />
-                  <defs>
-                    <linearGradient
-                      id="paint0_linear_1_505"
-                      x1="52.3391"
-                      y1="0"
-                      x2="52.3391"
-                      y2="78.8857"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop offset="0.0572917" stop-color="#A80000" />
-                      <stop offset="0.791667" stop-color="#DB5F1E" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-                <br />
-                <br />
-                <span style="font-weight: 200"> Drag and Drop File OR </span>
-                <br />
-                <br />
-                <button
-                  type="button"
-                  class="btn btn-secondary btn-sm btn-custom"
-                  onclick="triggerFileInput()"
-                >
-                  Browse
-                </button>
-              </div>
-              <br />
-              <div class="text-center">
-                <!-- Hidden file critanya -->
-                <input
-                  type="file"
-                  id="fileInput"
-                  name="logo"
-                  th:field="*{logo}"
-                  style="display: none"
-                  onchange="handleFileSelect()"
-                />
-                <p id="selectedFileDisplay"></p>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-10">
+                <div class="form-group my-4">
+                  <label for="name" class="custom-label">Nama</label>
+                  <p
+                      th:errors="*{name}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('name')}"
+                    ></p>
+                  <br />
+                  <input
+                    class="form-control custom-input"
+                    name="name"
+                    id="name"
+                    type="text"
+                    th:field="*{name}"
+                  ></input>
+                </div>
+                <div class="form-group">
+                  <label for="description" class="custom-label">Deskripsi</label>
+                  <p
+                      th:errors="*{description}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('description')}"
+                    ></p>
+                    <br />
+                  <textarea
+                    class="form-control custom-input"
+                    name="description"
+                    id="description"
+                    th:field="*{description}"
+                    cols="20"
+                    rows="10  "
+                  ></textarea>
+                </div>
+                <div class="form-group my-4">
+                  <label for="price" class="custom-label">Harga</label>
+                  <p
+                      th:errors="*{price}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('price')}"
+                    ></p>
+                  <br />
+                  <input
+                    class="form-control custom-input"
+                    name="price"
+                    id="price"
+                    type="number"
+                    th:field="*{price}"
+                  ></input>
+                </div>
+                <div class="form-group my-4">
+                  <label for="start_date" class="custom-label">Tanggal Mulai</label>
+                  <p
+                      th:errors="*{start_date}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('start_date')}"
+                    ></p>
+                  <br />
+                  <input
+                    class="form-control custom-input"
+                    name="start_date"
+                    id="start_date"
+                    type="date"
+                    th:field="*{start_date}"
+                  ></input>
+                </div>
+                <div class="form-group my-4">
+                  <label for="end_date" class="custom-label">Tanggal Selesai</label>
+                  <p
+                      th:errors="*{end_date}"
+                      class="text-danger"
+                      th:if="${#fields.hasErrors('end_date')}"
+                    ></p>
+                  <br />
+                  <input
+                    class="form-control custom-input"
+                    name="end_date"
+                    id="end_date"
+                    type="date"
+                    th:field="*{end_date}"
+                  ></input>
+                </div>
+                <div class="form-group pt-4">
+                  <label for="upload" class="custom-label">Upload Foto</label>
+                  <div class="card custom-input text-center p-3">
+                    <div id="upload-section">
+                      <svg
+                        width="950"
+                        height="79"
+                        viewBox="0 0 105 79"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M56.0816 78.8857V56.3469H71.0367L52.3428 33.8082L33.649 56.3469H48.6041V78.8857H29.9102V78.6979C29.2821 78.7355 28.6839 78.8857 28.0408 78.8857C20.6039 78.8857 13.4716 75.9175 8.21296 70.6339C2.95429 65.3504 0 58.1843 0 50.7123C0 36.2574 10.8798 24.4771 24.8404 22.8618C26.0644 16.433 29.4798 10.6336 34.4992 6.46111C39.5186 2.28866 45.8282 0.00396693 52.3428 0C58.8583 0.00366378 65.169 2.28808 70.1896 6.46044C75.2103 10.6328 78.6272 16.4324 79.8527 22.8618C93.8133 24.4771 104.678 36.2574 104.678 50.7123C104.678 58.1843 101.724 65.3504 96.4652 70.6339C91.2066 75.9175 84.0743 78.8857 76.6374 78.8857C76.0093 78.8857 75.4036 78.7355 74.768 78.6979V78.8857H56.0816Z"
+                          fill="url(#paint0_linear_1_505)"
+                        />
+                        <defs>
+                          <linearGradient
+                            id="paint0_linear_1_505"
+                            x1="52.3391"
+                            y1="0"
+                            x2="52.3391"
+                            y2="78.8857"
+                            gradientUnits="userSpaceOnUse"
+                          >
+                            <stop offset="0.0572917" stop-color="#A80000" />
+                            <stop offset="0.791667" stop-color="#DB5F1E" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                      <br />
+                      <br />
+                      <span style="font-weight: 200"
+                        >Drag and Drop File OR
+                      </span>
+                      <br />
+                      <br />
+                      <button
+                        type="button"
+                        class="btn btn-secondary btn-sm btn-custom"
+                        onclick="triggerFileInput()"
+                      >
+                        Browse
+                      </button>
+                    </div>
+                    <br />
+                    <div class="text-center">
+                      <!--  Masukan file  -->
+                      <input
+                        type="file"
+                        id="fileInput"
+                        name="poster"
+                        th:field="*{poster}"
+                        accept="image/*"
+                        style="display: none"
+                        onchange="handleFileSelect()"
+                      />
+                      <p id="selectedFileDisplay"></p>
+                    </div>
+                  </div>
+                  <div class="text-center mb-5 mt-5">
+                    <input
+                      type="submit"
+                      value="Save"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      class="btn btn-secondary btn-sm btn-custom"
+                    />
+                    <br />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-          <textarea
-              class="form-control custom-input"
-              hidden="true"
-              id="password"
-              name="password"
-              th:field="*{password}"
-              cols="30"
-            ></textarea
-            >
-
-          <div class="text-center mb-5">
-            <input
-              type="submit"
-              value="Submit"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              class="btn btn-secondary btn-sm btn-custom"
-            />
-            <br />
-          </div>
         </form>
-
-        <footer class="footer">
+        <footer
+          class="footer mt-5"
+          style="margin-left: -20px; margin-bottom: -20px"
+        >
           <div class="footer-left">
             <h1><strong>Kontak</strong></h1>
             <div class="img_">
@@ -1589,10 +1381,59 @@
           </div>
         </footer>
       </div>
-
-      <!-- slese disini -->
+      <!-- Data Sls -->
     </div>
-    <!--wrapper sls -->
+    <!-- Wrapper -->
+
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal p-3">
+          <div class="modal-body text-center">
+            <h3>Proposal berhasil diajukan</h3>
+            <br />
+            <svg
+              width="100"
+              height="100"
+              viewBox="0 0 151 151"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="75.5" cy="75.5" r="75.5" fill="white" />
+              <mask
+                id="mask0_1_455"
+                style="mask-type: alpha"
+                maskUnits="userSpaceOnUse"
+                x="14"
+                y="17"
+                width="121"
+                height="121"
+              >
+                <rect x="14" y="17" width="121" height="121" fill="#D9D9D9" />
+              </mask>
+              <g mask="url(#mask0_1_455)">
+                <path
+                  d="M62.1484 107.75L33.4109 79.0123L40.5953 71.8279L62.1484 93.3811L108.406 47.1238L115.59 54.3082L62.1484 107.75Z"
+                  fill="black"
+                />
+              </g>
+            </svg>
+            <br />
+            <br />
+            <a
+              th:href="@{index.html}"
+              class="btn btn-secondary btn-sm btn-custom-secondary"
+              >OK
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -1621,26 +1462,6 @@
 
         const uploadSection = document.getElementById("upload-section");
         uploadSection.style = "display: none;";
-      }
-
-      function activateCard(id) {
-        const element1 = document.getElementById(`card-login-1`);
-        const element2 = document.getElementById(`login-opt-1`);
-
-        const element3 = document.getElementById(`card-login-2`);
-        const element4 = document.getElementById(`login-opt-2`);
-
-        if (id === "1") {
-          element1.className = "card card-login active";
-          element2.className = "login-opt active";
-          element3.className = "card card-login";
-          element4.className = "login-opt";
-        } else if (id === "2") {
-          element1.className = "card card-login";
-          element2.className = "login-opt";
-          element3.className = "card card-login active";
-          element4.className = "login-opt active";
-        }
       }
     </script>
   </body>
