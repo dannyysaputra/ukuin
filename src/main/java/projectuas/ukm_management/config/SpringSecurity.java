@@ -48,6 +48,8 @@ public class SpringSecurity {
                             .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/home")).authenticated()
                             .requestMatchers(new AntPathRequestMatcher("/buat-event")).authenticated()
+                            .requestMatchers(new AntPathRequestMatcher("/edit-event/**")).authenticated()
+                            .requestMatchers(new AntPathRequestMatcher("/event-saya")).authenticated()
                             .anyRequest().permitAll();
                 })
                 .formLogin(
