@@ -86,7 +86,7 @@ public class EventController {
             if (event.getUser().equals(user)) {
                 eventService.deleteEventById(eventId);
                 logger.info("Event deleted successfully with ID: {}", eventId);
-                return "redirect:/event-saya";
+                return "redirect:/home";
             } else {
                 logger.warn("User {} is not authorized to delete event with ID: {}", username, eventId);
             }

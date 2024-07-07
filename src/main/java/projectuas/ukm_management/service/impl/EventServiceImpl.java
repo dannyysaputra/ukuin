@@ -2,8 +2,13 @@ package projectuas.ukm_management.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import projectuas.ukm_management.data.entity.Event;
 import projectuas.ukm_management.data.entity.User;
 import projectuas.ukm_management.data.repository.EventRepository;
@@ -11,11 +16,16 @@ import projectuas.ukm_management.service.EventService;
 
 @Service
 public class EventServiceImpl implements EventService {
-    
+    private static final Logger logger = LoggerFactory.getLogger(EventServiceImpl.class);
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
     private EventRepository eventRepository;
 
-    public EventServiceImpl(EventRepository eventRepository) {
+    public EventServiceImpl(EventRepository eventRepository, EntityManager entityManager) {
         this.eventRepository = eventRepository;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -24,8 +34,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional
     public void deleteEventById(Long id) {
-        eventRepository.deleteById(id);
+        entityManager
+                .createNativeQuery("DELETE FROM events WHERE id = :eventId")
+                .setParameter("eventId", id)
+                .executeUpdate();
     }
 
     @Override
@@ -59,6 +73,6 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getEvents() {
-        return eventRepository.findAll();   
+        return eventRepository.findAll();
     }
 }
