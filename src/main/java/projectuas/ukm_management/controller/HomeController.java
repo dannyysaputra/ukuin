@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import projectuas.ukm_management.data.entity.User;
+import projectuas.ukm_management.data.entity.Event;
+import projectuas.ukm_management.service.EventService;
 import projectuas.ukm_management.service.UserService;
 
 import java.util.List;
@@ -14,6 +16,9 @@ import java.util.List;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private EventService eventService;
 
     @Autowired
     private UserService userService;
@@ -25,12 +30,21 @@ public class HomeController {
         return "ukm";
     }
 
+    @GetMapping("/event")
+    public String showEventList (Model model) {
+        List<Event> events = eventService.getEvents();
+        model.addAttribute("events", events);
+        return "event";
+    }
+
     @GetMapping("/home")
     public String home(Model model, Authentication authentication) {
         String username = authentication.getName();
+
         System.out.println(username);
         model.addAttribute("ukm", userService.findUserByUsername(username));
+        model.addAttribute("events", eventService.getEventByName(username));
         return "ukm/dashboard";
     }
-    
+
 }

@@ -70,6 +70,13 @@ public class EventController {
         return "ukm/event-saya";
     }
 
+    @GetMapping("/detail-event/{eventId}")
+    public String detailEvent(@PathVariable("eventId") Long eventId, Model model){
+        Event event = eventService.getEventById(eventId);
+        model.addAttribute("event", event);
+        return "/detail_event";
+    }
+
     @GetMapping("/event-delete/{eventId}")
     public String deleteEvent(@PathVariable Long eventId, Authentication authentication) {
         String username = authentication.getName();
@@ -204,5 +211,6 @@ public class EventController {
         eventService.update(event, id);
         return "redirect:/home";
     }
+
 
 }

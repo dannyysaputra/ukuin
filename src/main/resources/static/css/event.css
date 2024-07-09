@@ -338,6 +338,11 @@ body {
     margin-top: 20px;
   }
 
+.item-container {
+  display: flex;
+  justify-content: space-around;
+}
+
   .event1 {
     margin-left: 25px;
     margin-top: 20px;
