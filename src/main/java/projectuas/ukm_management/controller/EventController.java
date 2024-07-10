@@ -67,7 +67,7 @@ public class EventController {
 
         model.addAttribute("ukm", user);
         model.addAttribute("events", events);
-        return "ukm/event-saya";
+        return "/ukm/event-saya";
     }
 
     @GetMapping("/detail-event/{eventId}")
